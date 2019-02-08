@@ -1,3 +1,5 @@
+package Database;
+
 public class Record
 {
     private int id;
@@ -5,8 +7,11 @@ public class Record
     private boolean good;
     private int length;
 
-    public Record() {
-
+    public Record(int id, String name, boolean good, int length) {
+        this.id = id;
+        this.name = name;
+        this.good = good;
+        this.length = length;
     }
 
     public int getId() {

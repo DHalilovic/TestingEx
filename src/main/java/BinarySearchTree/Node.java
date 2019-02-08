@@ -2,24 +2,24 @@ package BinarySearchTree;
 
 import java.util.Iterator;
 
-public class BinaryTree<E> {
-    protected BinaryTree<E> left;
-    protected BinaryTree<E> right;
-    protected BinaryTree<E> parent;
+public class Node<E> {
+    protected Node<E> left;
+    protected Node<E> right;
+    protected Node<E> parent;
     protected E val;
 
-    BinaryTree( E val, BinaryTree<E> l, BinaryTree<E> r){
+    Node(E val, Node<E> l, Node<E> r){
         left = l;
         right = r;
         parent = null;
         this.val = val;
     }
 
-    BinaryTree(E val){
+    Node(E val){
         this(val, null, null);
     }
 
-    BinaryTree(){
+    Node(){
         this(null);
     }
 
@@ -67,7 +67,7 @@ public class BinaryTree<E> {
 
     }
 
-    public BinaryTree<E> left(){
+    public Node<E> left(){
 
     }
 
@@ -75,7 +75,7 @@ public class BinaryTree<E> {
 
     }
 
-    public BinaryTree<E> parent(){
+    public Node<E> parent(){
 
     }
 
@@ -87,11 +87,11 @@ public class BinaryTree<E> {
 
     }
 
-    public BinaryTree<E> right(){
+    public Node<E> right(){
 
     }
 
-    public BinaryTree<E> root(){
+    public Node<E> root(){
 
     }
 
@@ -103,15 +103,15 @@ public class BinaryTree<E> {
 
     }
 
-    public void setLeft(BinaryTree<E> otherL){
+    public void setLeft(Node<E> otherL){
 
     }
 
-    public void setRight(BinaryTree<E> otherR){
+    public void setRight(Node<E> otherR){
 
     }
 
-    protected void setParent(BinaryTree<E> otherP){
+    protected void setParent(Node<E> otherP){
 
     }
 

@@ -6,8 +6,8 @@ import java.util.Iterator;
 public class BinarySearchTree<E extends Comparable<E>> {
     protected int size;
     protected Comparator<E> ordering;
-    protected BinaryTree<E> root;
-    protected final BinaryTree<E> EMPTY = new BinaryTree<E>();
+    protected Node<E> root;
+    protected final Node<E> EMPTY = new Node<E>();
 
     public BinarySearchTree(){
         this(new ClassicOrdering<E>());
@@ -21,7 +21,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
     }
 
     public boolean add(E val){
-        BinaryTree<E> newNode = new BinaryTree<E>(val,EMPTY,EMPTY);
+        Node<E> newNode = new Node<E>(val,EMPTY,EMPTY);
 
         // add value to binary search tree
         // if there's no root, create value at root
@@ -29,7 +29,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
         {
             root = newNode;
         } else {
-            BinaryTree<E> insertLocation = search(root,val);
+            Node<E> insertLocation = search(root,val);
             E nodeValue = insertLocation.value();
             // The location returned is the successor or predecessor
             // of the to-be-inserted value
@@ -48,21 +48,21 @@ public class BinarySearchTree<E extends Comparable<E>> {
     }
 
     public void clear(){
-        root = new BinaryTree<E>();
+        root = new Node<E>();
         size = 0;
     }
 
     public boolean contains(E val){
         if (root.isEmpty()) return false;
 
-        BinaryTree<E> possibleLocation = search(root,val);
+        Node<E> possibleLocation = search(root,val);
         return val.equals(possibleLocation.value());
     }
 
     public E get(E val){
         if (root.isEmpty()) return null;
 
-        BinaryTree<E> possibleLocation = search(root,val);
+        Node<E> possibleLocation = search(root,val);
         if (val.equals(possibleLocation.value()))
             return possibleLocation.value();
         else
@@ -77,10 +77,10 @@ public class BinarySearchTree<E extends Comparable<E>> {
         return root.inorderIterator();
     }
 
-    protected BinaryTree<E> search(BinaryTree<E> root, E val){
+    protected Node<E> search(Node<E> root, E val){
         if(!isEmpty()) {
             E rootValue = root.value();
-            BinaryTree<E> child;
+            Node<E> child;
 
             // found at root: done
             if (rootValue.equals(val)) return root;
@@ -106,7 +106,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
 
         if (val.equals(root.value())) // delete root value
         {
-            BinaryTree<E> newroot = removeTop(root);
+            Node<E> newroot = removeTop(root);
             size--;
             E result = root.value();
             root = newroot;
@@ -114,11 +114,11 @@ public class BinarySearchTree<E extends Comparable<E>> {
         }
         else
         {
-            BinaryTree<E> location = search(root,val);
+            Node<E> location = search(root,val);
 
             if (val.equals(location.value())) {
                 size--;
-                BinaryTree<E> parent = location.parent();
+                Node<E> parent = location.parent();
                 if (parent.right() == location) {
                     parent.setRight(removeTop(location));
                 } else {
@@ -130,22 +130,22 @@ public class BinarySearchTree<E extends Comparable<E>> {
         return null;
     }
 
-    protected BinaryTree<E> removeTop(BinaryTree<E> top){
-        // remove topmost BinaryTree from a binary search tree
-        BinaryTree<E> left  = top.left();
-        BinaryTree<E> right = top.right();
+    protected Node<E> removeTop(Node<E> top){
+        // remove topmost Node from a binary search tree
+        Node<E> left  = top.left();
+        Node<E> right = top.right();
         // disconnect top node
         top.setLeft(EMPTY);
         top.setRight(EMPTY);
-        // Case a, no left BinaryTree
+        // Case a, no left Node
         //   easy: right subtree is new tree
         if (left.isEmpty()) { return right; }
-        // Case b, no right BinaryTree
+        // Case b, no right Node
         //   easy: left subtree is new tree
         if (right.isEmpty()) { return left; }
         // Case c, left node has no right subtree
         //   easy: make right subtree of left
-        BinaryTree<E> pred = left.right();
+        Node<E> pred = left.right();
         if (pred.isEmpty())
         {
             left.setRight(right);
@@ -154,7 +154,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
         // General case, slide down left tree
         //   harder: successor of root becomes new root
         //           parent always points to parent of predecessor
-        BinaryTree<E> parent = left;
+        Node<E> parent = left;
         while (!pred.right().isEmpty())
         {
             parent = pred;
@@ -183,11 +183,11 @@ public class BinarySearchTree<E extends Comparable<E>> {
 //
 //    }
 
-//    protected BinaryTree<E> predecessor(BinaryTree<E> node){
+//    protected Node<E> predecessor(Node<E> node){
 //
 //    }
 //
-//    protected BinaryTree<E> successor(BinaryTree<E> node){
+//    protected Node<E> successor(Node<E> node){
 //
 //    }
 }

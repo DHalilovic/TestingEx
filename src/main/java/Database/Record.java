@@ -1,6 +1,6 @@
 package Database;
 
-public class Record
+public class Record implements Comparable<Record>
 {
     private int id;
     private String name;
@@ -44,5 +44,9 @@ public class Record
 
     public void setLength(int length) {
         this.length = length;
+    }
+
+    public int compareTo(Record o) {
+        return name.compareTo(o.getName());
     }
 }

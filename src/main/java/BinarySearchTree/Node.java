@@ -24,11 +24,25 @@ public class Node<E> {
     }
 
     public int depth(){
+        int count = 0;
+        Node<E> currentP = parent;
+        while( currentP != null ){
+            count++;
+            currentP = currentP.parent;
+        }
 
+        return count;
     }
 
     public int height(){
+        int leftHeight = left.height();
+        int rightHeight = right.height();
 
+        if( leftHeight >= rightHeight ){
+            return leftHeight + 1;
+        }else{
+            return rightHeight + 1;
+        }
     }
 
     public E value(){
@@ -40,7 +54,7 @@ public class Node<E> {
     }
 
     public boolean isBalanced(){
-
+        return Math.abs( left.height() - right.height() ) <= 1;
     }
 
     public boolean isComplete(){
@@ -48,7 +62,7 @@ public class Node<E> {
     }
 
     public boolean isEmpty(){
-
+        return val == null;
     }
 
     public boolean isFull(){
@@ -56,19 +70,25 @@ public class Node<E> {
     }
 
     public boolean isLeft(){
-
+        if( parent != null && parent.left == this ){
+            return true;
+        }
+        return false;
     }
 
     public boolean isRight(){
-
+        if( parent != null && parent.right == this ){
+            return true;
+        }
+        return false;
     }
 
     public Iterator<E> iterator(){
-
+        return this.inorderIterator();
     }
 
     public Node<E> left(){
-
+        return left;
     }
 
     public Iterator<E> levelOrderIterator(){
@@ -76,7 +96,7 @@ public class Node<E> {
     }
 
     public Node<E> parent(){
-
+        return parent;
     }
 
     public Iterator<E> postorderIterator(){
@@ -88,11 +108,7 @@ public class Node<E> {
     }
 
     public Node<E> right(){
-
-    }
-
-    public Node<E> root(){
-
+        return right;
     }
 
     protected void rotateLeft(){
@@ -104,30 +120,32 @@ public class Node<E> {
     }
 
     public void setLeft(Node<E> otherL){
-
+        left = otherL;
     }
 
     public void setRight(Node<E> otherR){
-
+        right = otherR;
     }
 
     protected void setParent(Node<E> otherP){
-
+        parent = otherP;
     }
 
     public void setValue(E val){
-
+        this.val = val;
     }
 
-    public int size(){
+//    public Node<E> root(){}
 
-    }
+//    public int size(){
+//        return size;
+//    }
 
-    public String toString(){
-
-    }
-
-    public String treeString(){
-
-    }
+//    public String toString(){
+//
+//    }
+//
+//    public String treeString(){
+//
+//    }
 }

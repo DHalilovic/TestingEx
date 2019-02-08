@@ -2,8 +2,8 @@ public class Record
 {
     private int id;
     private String name;
-    private boolean infected;
-    private int beepisLength;
+    private boolean good;
+    private int length;
 
     public Record() {
 
@@ -25,19 +25,19 @@ public class Record
         this.name = name;
     }
 
-    public boolean isInfected() {
-        return infected;
+    public boolean isGood() {
+        return good;
     }
 
-    public void setInfected(boolean infected) {
-        this.infected = infected;
+    public void setGood(boolean good) {
+        this.good = good;
     }
 
-    public int getBeepisLength() {
-        return beepisLength;
+    public int getLength() {
+        return length;
     }
 
-    public void setBeepisLength(int beepisLength) {
-        this.beepisLength = beepisLength;
+    public void setLength(int length) {
+        this.length = length;
     }
 }

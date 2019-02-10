@@ -108,12 +108,9 @@ public class Node<V> {
         }
 
         // case 2: left is complete, right is full, heights differ
-        if (leftIsComplete && rightIsFull &&
-                (leftHeight == (rightHeight + 1))){
-            return true;
-        }
+        return leftIsComplete && rightIsFull &&
+                (leftHeight == (rightHeight + 1));
 
-        return false;
     }
 
     public boolean isEmpty(){
@@ -130,17 +127,11 @@ public class Node<V> {
     }
 
     public boolean isLeft(){
-        if( parent != null && parent.left == this ){
-            return true;
-        }
-        return false;
+        return parent != null && parent.left == this;
     }
 
     public boolean isRight(){
-        if( parent != null && parent.right == this ){
-            return true;
-        }
-        return false;
+        return parent != null && parent.right == this;
     }
 
     public Node<V> left(){

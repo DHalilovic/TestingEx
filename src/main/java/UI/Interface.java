@@ -8,7 +8,6 @@ public abstract class Interface {
 
     public Interface() {
         frame = new JFrame("Graphical User Interface");
-        frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }

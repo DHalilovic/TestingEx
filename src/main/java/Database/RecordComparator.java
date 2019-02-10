@@ -11,7 +11,6 @@ public class RecordComparator implements Comparator<Integer> {
     }
 
     public int compare(Integer o1, Integer o2) {
-        //db.
-        return 0;
+        return db.get(o1).compareTo(db.get(o2));
     }
 }

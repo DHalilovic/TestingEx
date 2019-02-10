@@ -1,23 +1,26 @@
 package Database;
 
-public class AppDatabase extends Database{
+public class AppDatabase extends Database {
 
     public Record get(int id) {
-        return records.get(indices.get(id));
+        return records.get(records.get(id));
     }
 
-    public boolean add(Record r) {
-        records.add(r); // Add record to list
-        int ind = records.size() - 1; // Get record index
-
-        boolean success = false;
-
-        // Reject record if its id is not unique
-        if (!indices.containsKey(r.getId())) {
-            indices.put(r.getId(), ind); // Save record location
-            success = true;
+    public Record add(Record r) {
+        // Increment if current id not available/unique
+        while (records.containsKey(idCounter)) {
+            idCounter++;
         }
 
-        return success;
+        records.put(idCounter, r); // Add record
+
+        // Increment to next id for easier future use
+        idCounter++;
+
+        return r;
+    }
+
+    public Record remove(int id) {
+        return records.remove(id);
     }
 }

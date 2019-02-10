@@ -2,24 +2,14 @@ package Database;
 
 public class Record implements Comparable<Record>
 {
-    private int id;
     private String name;
     private boolean good;
     private int length;
 
-    public Record(int id, String name, boolean good, int length) {
-        this.id = id;
+    public Record(String name, boolean good, int length) {
         this.name = name;
         this.good = good;
         this.length = length;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {

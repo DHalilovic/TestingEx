@@ -6,9 +6,11 @@ public class Node<V> {
     protected Node<V> left;
     protected Node<V> right;
     protected Node<V> parent;
+    protected Integer id;
     protected V val;
 
-    public Node(V val, Node<V> l, Node<V> r){
+    public Node(Integer id, V val, Node<V> l, Node<V> r){
+        this.id = id;
         this.val = val;
         parent = null;
 
@@ -32,12 +34,12 @@ public class Node<V> {
         setRight(right);
     }
 
-    public Node(V val){
-        this(val, null, null);
+    public Node(Integer id, V val){
+        this(id, val, null, null);
     }
 
     public Node(){
-        this(null, null, null);
+        this(null, null, null, null);
     }
 
     public int depth(){

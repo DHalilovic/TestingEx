@@ -1,5 +1,14 @@
 package UI;
 
-public class Interface {
+import javax.swing.JFrame;
 
+public abstract class Interface {
+
+    protected JFrame frame;
+
+    public Interface() {
+        frame = new JFrame("Graphical User Interface");
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
 }

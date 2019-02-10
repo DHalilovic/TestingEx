@@ -1,9 +1,15 @@
 package Database;
 
+import java.util.List;
+
 public class AppDatabase extends Database {
 
-    public Record get(int id) {
-        return records.get(records.get(id));
+    public Record getById(int id) {
+        return records.get(id);
+    }
+
+    public List<Record> getList(Record r) {
+        return null;
     }
 
     public Record add(Record r) {
@@ -20,7 +26,12 @@ public class AppDatabase extends Database {
         return r;
     }
 
-    public Record remove(int id) {
+    public Record removeById(int id) {
+        tree.remove(id);
         return records.remove(id);
+    }
+
+    public List<Record> filter(Record record) {
+        return null;
     }
 }

@@ -1,16 +1,19 @@
 package BinarySearchTree;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Node<V> {
     protected Node<V> left;
     protected Node<V> right;
     protected Node<V> parent;
-    protected Integer id;
+    protected ArrayList<Integer> ids;
     protected V val;
 
     public Node(Integer id, V val, Node<V> l, Node<V> r){
-        this.id = id;
+        this.ids = new ArrayList<Integer>();
+        this.ids.add(id);
+
         this.val = val;
         parent = null;
 

@@ -20,6 +20,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
         ordering = alternateOrder;
     }
 
+    // returns true if val already exists in BinarySearchTree
     public boolean add(Integer id, E val){
         Node<E> newNode = new Node<E>(id, val,EMPTY,EMPTY);
 
@@ -34,7 +35,8 @@ public class BinarySearchTree<E extends Comparable<E>> {
             // The location returned is the successor or predecessor
             // of the to-be-inserted value
             int compare = ordering.compare(nodeValue, val);
-            if(compare == 0){ // if value == nodeValue
+            if(compare == 0){ // if val == nodeValue
+                insertLocation.ids.add(id);
                 return true;
             }
             else if (compare < 0) { // if value > nodeValue

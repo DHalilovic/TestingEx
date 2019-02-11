@@ -1,9 +1,12 @@
 package UI;
 
 import Database.AppDatabase;
+import Database.Record;
 
 import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class AppInterface extends Interface {
 
@@ -11,19 +14,19 @@ public class AppInterface extends Interface {
     protected JTextArea textArea;
     protected AppDatabase db;
 
-    public AppInterface(){
+    public AppInterface() {
         super();
 
         db = new AppDatabase();
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int height = (int) (  screenSize.getHeight()  ) ;
-        int width = (int) ( 4.5 * screenSize.getWidth() / 5 ) ;
+        int height = (int) (screenSize.getHeight());
+        int width = (int) (4.5 * screenSize.getWidth() / 5);
 
         frame.setSize(width, height);
         frame.setLocation(0, 0);
 
-        frame.setLayout(new GridLayout(2,1));
+        frame.setLayout(new GridLayout(2, 1));
 
         panels = new JPanel[2];
 
@@ -62,7 +65,7 @@ public class AppInterface extends Interface {
         panels[0] = new JPanel();
         panels[0].setLayout(new FlowLayout());
 
-        String[] operators = new String[] {"==", "!=", "<",
+        String[] operators = new String[]{"==", "!=", "<",
                 "<=", ">", ">="};
 
         panels[0].add(nameLabel);
@@ -94,5 +97,52 @@ public class AppInterface extends Interface {
         frame.getContentPane().add(panels[1]);
     }
 
+    public class RecordTableModel extends AbstractTableModel {
 
+        private final String[] columns = {"Name", "Good", "Length"};
+        private ArrayList<Record> data;
+
+        public int getRowCount() {
+            int size;
+
+            if (data == null)
+                size = 0;
+            else
+                size = data.size();
+
+            return size;
+        }
+
+        public int getColumnCount() {
+            return columns.length;
+        }
+
+        public Object getValueAt(int rowIndex, int columnIndex) {
+            Object val = null;
+
+            switch (columnIndex) {
+                case 0:
+                    val = data.get(rowIndex).getName();
+                    break;
+                case 1:
+                    val = data.get(rowIndex).isGood();
+                    break;
+                case 2:
+                    val = data.get(rowIndex).getLength();
+                    break;
+            }
+
+            return val;
+        }
+
+        public Class getColumnClass(int columnIndex) {
+            if (columnIndex == 0)
+                return String.class;
+            else if (columnIndex == 1)
+                return Boolean.class;
+            else
+                return Integer.class;
+        }
+    }
 }
+

@@ -1,16 +1,9 @@
 package Database;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AppDatabase extends Database {
-
-    public Record getById(int id) {
-        return records.get(id);
-    }
-
-    public List<Record> getList(Record r) {
-        return null;
-    }
 
     public Record add(Record r) {
         // Increment if current id not available/unique
@@ -31,7 +24,15 @@ public class AppDatabase extends Database {
         return records.remove(r.getId()); // Remove id from records
     }
 
-    public List<Record> get(Record record) {
+    public Record get(Record r) {
+        return records.get(r.getId());
+    }
+
+    public Record get(int id) {
+        return records.get(id);
+    }
+
+    public ArrayList<Record> filter(Record r) {
         return null;
     }
 }

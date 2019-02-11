@@ -6,11 +6,15 @@ import Database.Record;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class AppInterface extends Interface {
 
     protected JTable table;
+    protected RecordTableModel model;
     protected AppDatabase db;
 
     public AppInterface() {
@@ -36,23 +40,54 @@ public class AppInterface extends Interface {
     private JPanel setPanel() {
         // textfield for 'name' attribute:
         JLabel nameLabel = new JLabel("Name:");
-        JTextField nameTextField = new JTextField(20);
+        final JTextField nameTextField = new JTextField(20);
         nameLabel.setLabelFor(nameTextField);
 
         // checkbox for 'good' attribute:
         JLabel goodLabel = new JLabel("Good?:");
-        JCheckBox goodCheckBox = new JCheckBox();
+        final JCheckBox goodCheckBox = new JCheckBox();
         goodLabel.setLabelFor(goodCheckBox);
 
         // textfield for 'length' attribute:
         JLabel lengthLabel = new JLabel("Length:");
-        JTextField lengthTextField = new JTextField(20);
+        final JFormattedTextField lengthTextField = new JFormattedTextField(NumberFormat.getIntegerInstance());
+        lengthTextField.setColumns(20);
         lengthLabel.setLabelFor(lengthTextField);
 
         // Create buttons:
         JButton addBtn = new JButton("Add record");
         JButton deleteBtn = new JButton("Delete record");
         JButton findBtn = new JButton("Find record");
+
+        // Assign button listeners:
+        addBtn.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        // Check for valid input
+                        if (lengthTextField.getText().length() > 0) {
+                            // Parse record
+                            Record r = new Record(nameTextField.getText(), goodCheckBox.isSelected(), Integer.parseInt(lengthTextField.getText()));
+                            // Add record to database
+                            db.add(r);
+                        }
+                    }
+                }
+        );
+
+        // Assign button listeners:
+        findBtn.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        // Check for valid input
+                        if (lengthTextField.getText().length() > 0) {
+                            // Parse record
+                            Record r = new Record(nameTextField.getText(), goodCheckBox.isSelected(), Integer.parseInt(lengthTextField.getText()));
+                            // Retrieve filtered records from database
+                            model.setData(db.filter(r));
+                        }
+                    }
+                }
+        );
 
         // Add success label:
         JLabel successLabel = new JLabel("Result: ");
@@ -84,7 +119,8 @@ public class AppInterface extends Interface {
     private JPanel setTextArea() {
         JPanel panel = new JPanel();
         //panels[1].setPreferredSize(new Dimension(200, 250));
-        table = new JTable(new RecordTableModel());
+        model = new RecordTableModel();
+        table = new JTable(model);
 
         JScrollPane vertical = new JScrollPane(table);
         vertical.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -100,6 +136,14 @@ public class AppInterface extends Interface {
 
         public RecordTableModel() {
             data = new ArrayList<Record>();
+        }
+
+        public ArrayList<Record> getData() {
+            return data;
+        }
+
+        public void setData(ArrayList<Record> data) {
+            this.data = data;
         }
 
         public int getRowCount() {

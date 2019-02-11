@@ -2,6 +2,7 @@ package Database;
 
 import BinarySearchTree.BinarySearchTree;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -20,7 +21,9 @@ public abstract class Database {
 
     abstract Record remove(Record r);
 
-    abstract Record getById(int id);
+    abstract Record get(Record r);
 
-    abstract List<Record> get(Record record);
+    abstract Record get(int id);
+
+    abstract ArrayList<Record> filter(Record r);
 }

@@ -1,5 +1,6 @@
 package BinarySearchTree;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 
@@ -61,12 +62,13 @@ public class BinarySearchTree<E extends Comparable<E>> {
         return val.equals(possibleLocation.value());
     }
 
-    public E get(E val){
+    // if val exists in tree, return the list of the ids for the records that store val.
+    public ArrayList<Integer> get(E val){
         if (root.isEmpty()) return null;
 
         Node<E> possibleLocation = search(root,val);
         if (val.equals(possibleLocation.value()))
-            return possibleLocation.value();
+            return possibleLocation.ids;
         else
             return null;
     }

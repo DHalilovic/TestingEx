@@ -20,8 +20,8 @@ public class BinarySearchTree<E extends Comparable<E>> {
         ordering = alternateOrder;
     }
 
-    public boolean add(E val){
-        Node<E> newNode = new Node<E>(val,EMPTY,EMPTY);
+    public boolean add(Integer id, E val){
+        Node<E> newNode = new Node<E>(id, val,EMPTY,EMPTY);
 
         // add value to binary search tree
         // if there's no root, create value at root

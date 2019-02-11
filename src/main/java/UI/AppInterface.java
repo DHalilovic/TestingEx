@@ -1,42 +1,54 @@
 package UI;
 
+import Database.AppDatabase;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class AppInterface extends Interface {
 
+    protected JPanel[] panels;
+    protected JTextArea textArea;
+    protected AppDatabase db;
+
     public AppInterface(){
         super();
 
+        db = new AppDatabase();
+
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int height = (int) (  4 * screenSize.getHeight() / 5 ) ;
-        int width = (int) ( 2 * screenSize.getWidth() / 3 ) ;
+        int height = (int) (  screenSize.getHeight()  ) ;
+        int width = (int) ( 4.5 * screenSize.getWidth() / 5 ) ;
 
         frame.setSize(width, height);
         frame.setLocation(0, 0);
 
-        frame.setLayout(new GridLayout(3,1));
+        frame.setLayout(new GridLayout(4,1));
+
+        panels = new JPanel[4];
 
         setAddRecordPanel();
         setDeleteRecordsPanel();
         setFilterRecordsPanel();
 
+        setTextArea();
+
         frame.setVisible(true);
     }
 
     private void setAddRecordPanel() {
-        setPanel("Add record");
+        setPanel(0, "Add record", true);
     }
 
     private void setDeleteRecordsPanel() {
-        setPanel("Delete records");
+        setPanel(1, "Delete records", false);
     }
 
     private void setFilterRecordsPanel() {
-        setPanel("Find Records");
+        setPanel(2, "Find Records", false);
     }
 
-    private void setPanel(String btnLabel) {
+    private void setPanel(int panelIndex, String btnLabel, boolean addPanel) {
         // Display textfield for 'id' attribute:
         JLabel idLabel = new JLabel("Id:");
         JTextField idTextField = new JTextField(20);
@@ -62,27 +74,47 @@ public class AppInterface extends Interface {
         JButton btn = new JButton(btnLabel);
 
         // Add success label:
-        JLabel successLabel = new JLabel("");
+        JLabel successLabel = new JLabel("Result: ");
 
-        // Add all attributes to panel:
-        JPanel panel = new JPanel();
-        panel.setLayout(new FlowLayout());
+        // Add all attributes to panels:
+        panels[panelIndex] = new JPanel();
+        panels[panelIndex].setLayout(new FlowLayout());
 
-        panel.add(idLabel);
-        panel.add(idTextField);
-        panel.add(nameLabel);
-        panel.add(nameTextField);
-        panel.add(goodLabel);
-        panel.add(goodCheckBox);
-        panel.add(lengthLabel);
-        panel.add(lengthTextField);
-        panel.add(btn);
-        panel.add(successLabel);
+        String[] operators = new String[] {"==", "!=", "<",
+                "<=", ">", ">="};
 
-        frame.getContentPane().add(panel);
+        panels[panelIndex].add(idLabel);
+        if(!addPanel) panels[panelIndex].add(new JComboBox<String>(operators));
+        panels[panelIndex].add(idTextField);
+
+        panels[panelIndex].add(nameLabel);
+        if(!addPanel) panels[panelIndex].add(new JComboBox<String>(operators));
+        panels[panelIndex].add(nameTextField);
+
+        panels[panelIndex].add(goodLabel);
+        panels[panelIndex].add(goodCheckBox);
+
+        panels[panelIndex].add(lengthLabel);
+        if(!addPanel) panels[panelIndex].add(new JComboBox<String>(operators));
+        panels[panelIndex].add(lengthTextField);
+
+        panels[panelIndex].add(btn);
+        panels[panelIndex].add(successLabel);
+
+        frame.getContentPane().add(panels[panelIndex]);
     }
 
+    private void setTextArea() {
+        panels[3] = new JPanel();
+        panels[3].setPreferredSize(new Dimension(200, 250));
+        textArea = new JTextArea(10, 100);
 
+        JScrollPane vertical = new JScrollPane(textArea);
+        vertical.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        panels[3].add(vertical);
+
+        frame.getContentPane().add(panels[3]);
+    }
 
 
 }

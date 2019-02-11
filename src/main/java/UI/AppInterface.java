@@ -34,18 +34,6 @@ public class AppInterface extends Interface {
         frame.setVisible(true);
     }
 
-//    private void setAddRecordPanel() {
-//        setPanel(0, "Add record", true);
-//    }
-//
-//    private void setDeleteRecordsPanel() {
-//        setPanel(1, "Delete records", false);
-//    }
-//
-//    private void setFilterRecordsPanel() {
-//        setPanel(2, "Find Records", false);
-//    }
-
     private void setPanel() {
         // textfield for 'name' attribute:
         JLabel nameLabel = new JLabel("Name:");
@@ -78,14 +66,12 @@ public class AppInterface extends Interface {
                 "<=", ">", ">="};
 
         panels[0].add(nameLabel);
-        //if(!addPanel) panels[panelIndex].add(new JComboBox<String>(operators));
         panels[0].add(nameTextField);
 
         panels[0].add(goodLabel);
         panels[0].add(goodCheckBox);
 
         panels[0].add(lengthLabel);
-        //if(!addPanel) panels[panelIndex].add(new JComboBox<String>(operators));
         panels[0].add(lengthTextField);
 
         panels[0].add(addBtn);

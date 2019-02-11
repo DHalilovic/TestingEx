@@ -152,42 +152,42 @@ public class Node<V> {
         return right;
     }
 
-    protected void rotateLeft(){
-        Node<V> parent = parent();
-        Node<V> newRoot = right();
-        // is the this node a child; if so, a left child?
-        boolean wasChild = parent != null;
-        boolean wasRightChild = isRight();
-
-        // hook in new root (sets newRoot's parent, as well)
-        setRight(newRoot.left());
-
-        // put pivot below it (sets this's parent, as well)
-        newRoot.setLeft(this);
-
-        if (wasChild) {
-            if (wasRightChild) parent.setRight(newRoot);
-            else               parent.setLeft(newRoot);
-        }
-    }
-
-    protected void rotateRight(){
-        Node<V> parent = parent();
-        Node<V> newRoot = left();
-        boolean wasChild = parent != null;
-        boolean wasLeftChild = isLeft();
-
-        // hook in new root (sets newRoot's parent, as well)
-        setLeft(newRoot.right());
-
-        // puts pivot below it (sets this's parent, as well)
-        newRoot.setRight(this);
-
-        if (wasChild) {
-            if (wasLeftChild) parent.setLeft(newRoot);
-            else              parent.setRight(newRoot);
-        }
-    }
+//    protected void rotateLeft(){
+//        Node<V> parent = parent();
+//        Node<V> newRoot = right();
+//        // is the this node a child; if so, a left child?
+//        boolean wasChild = parent != null;
+//        boolean wasRightChild = isRight();
+//
+//        // hook in new root (sets newRoot's parent, as well)
+//        setRight(newRoot.left());
+//
+//        // put pivot below it (sets this's parent, as well)
+//        newRoot.setLeft(this);
+//
+//        if (wasChild) {
+//            if (wasRightChild) parent.setRight(newRoot);
+//            else               parent.setLeft(newRoot);
+//        }
+//    }
+//
+//    protected void rotateRight(){
+//        Node<V> parent = parent();
+//        Node<V> newRoot = left();
+//        boolean wasChild = parent != null;
+//        boolean wasLeftChild = isLeft();
+//
+//        // hook in new root (sets newRoot's parent, as well)
+//        setLeft(newRoot.right());
+//
+//        // puts pivot below it (sets this's parent, as well)
+//        newRoot.setRight(this);
+//
+//        if (wasChild) {
+//            if (wasLeftChild) parent.setLeft(newRoot);
+//            else              parent.setRight(newRoot);
+//        }
+//    }
 
     public void setLeft(Node<V> otherL){
         if (isEmpty()) return; // do nothing if val == null

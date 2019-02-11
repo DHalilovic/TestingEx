@@ -4,26 +4,26 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Set;
 
-public class BinarySearchTree<E extends Comparable<E>> {
+public class BinarySearchTree<V extends Comparable<V>> {
     protected int size;
-    protected Comparator<E> ordering;
-    protected Node<E> root;
-    protected final Node<E> EMPTY = new Node<E>();
+    protected Comparator<V> ordering;
+    protected Node<V> root;
+    protected final Node<V> EMPTY = new Node<V>();
 
     public BinarySearchTree(){
-        this(new ClassicOrdering<E>());
+        this(new ClassicOrdering<V>());
     }
 
-    public BinarySearchTree(Comparator<E> alternateOrder)
+    public BinarySearchTree(Comparator<V> alternateOrder)
     {
         root = EMPTY;
         size = 0;
         ordering = alternateOrder;
     }
 
-    // returns true if val already exists in BinarySearchTree
-    public boolean add(Integer id, E val){
-        Node<E> newNode = new Node<E>(id, val,EMPTY,EMPTY);
+    // returns true if (id, val) pair was added to tree.
+    public boolean add(Integer id, V val){
+        Node<V> newNode = new Node<V>(id, val,EMPTY,EMPTY);
 
         // add value to binary search tree
         // if there's no root, create value at root
@@ -31,14 +31,13 @@ public class BinarySearchTree<E extends Comparable<E>> {
         {
             root = newNode;
         } else {
-            Node<E> insertLocation = search(root,val);
-            E nodeValue = insertLocation.value();
+            Node<V> insertLocation = search(root,val);
+            V nodeValue = insertLocation.value();
             // The location returned is the successor or predecessor
             // of the to-be-inserted value
             int compare = ordering.compare(nodeValue, val);
             if(compare == 0){ // if val == nodeValue
-                insertLocation.ids.add(id);
-                return true;
+                return insertLocation.ids.add(id);
             }
             else if (compare < 0) { // if value > nodeValue
                 insertLocation.setRight(newNode);
@@ -47,26 +46,26 @@ public class BinarySearchTree<E extends Comparable<E>> {
             }
         }
         size++;
-        return false;
+        return true;
     }
 
     public void clear(){
-        root = new Node<E>();
+        root = new Node<V>();
         size = 0;
     }
 
-    public boolean contains(E val){
+    public boolean contains(V val){
         if (root.isEmpty()) return false;
 
-        Node<E> possibleLocation = search(root,val);
+        Node<V> possibleLocation = search(root,val);
         return val.equals(possibleLocation.value());
     }
 
     // if val exists in tree, return the list of the ids for the records that store val.
-    public Set<Integer> get(E val){
+    public Set<Integer> get(V val){
         if (root.isEmpty()) return null;
 
-        Node<E> possibleLocation = search(root,val);
+        Node<V> possibleLocation = search(root,val);
         if (val.equals(possibleLocation.value()))
             return possibleLocation.ids;
         else
@@ -77,14 +76,14 @@ public class BinarySearchTree<E extends Comparable<E>> {
         return root == EMPTY;
     }
 
-    public Iterator<E> iterator(){
+    public Iterator<V> iterator(){
         return root.inorderIterator();
     }
 
-    protected Node<E> search(Node<E> root, E val){
+    protected Node<V> search(Node<V> root, V val){
         if(!isEmpty()) {
-            E rootValue = root.value();
-            Node<E> child;
+            V rootValue = root.value();
+            Node<V> child;
 
             // found at root: done
             if (rootValue.equals(val)) return root;
@@ -105,47 +104,33 @@ public class BinarySearchTree<E extends Comparable<E>> {
         return root;
     }
 
-    public Integer remove( Integer id, E val ){
+    public Integer remove( Integer id, V val ){
         if (isEmpty()) return null;
 
-        if (val.equals(root.value())) // delete root value
-        {
-            if(root.ids.size() < 2) {
-                Node<E> newroot = removeTop(root);
+        Node<V> location = search(root,val);
+
+        if (val.equals(location.value())) {
+            if(location.ids.size() < 2) {
                 size--;
-                E result = root.value();
-                root = newroot;
+                Node<V> parent = location.parent();
+                if (parent.right() == location) {
+                    parent.setRight(removeTop(location));
+                } else {
+                    parent.setLeft(removeTop(location));
+                }
             } else {
-                root.ids.remove(id);
+                location.ids.remove(id);
             }
             return id;
         }
-        else
-        {
-            Node<E> location = search(root,val);
 
-            if (val.equals(location.value())) {
-                if(location.ids.size() < 2) {
-                    size--;
-                    Node<E> parent = location.parent();
-                    if (parent.right() == location) {
-                        parent.setRight(removeTop(location));
-                    } else {
-                        parent.setLeft(removeTop(location));
-                    }
-                } else {
-                    location.ids.remove(id);
-                }
-                return id;
-            }
-        }
         return null;
     }
 
-    protected Node<E> removeTop(Node<E> top){
+    protected Node<V> removeTop(Node<V> top){
         // remove topmost Node from a binary search tree
-        Node<E> left  = top.left();
-        Node<E> right = top.right();
+        Node<V> left  = top.left();
+        Node<V> right = top.right();
         // disconnect top node
         top.setLeft(EMPTY);
         top.setRight(EMPTY);
@@ -157,7 +142,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
         if (right.isEmpty()) { return left; }
         // Case c, left node has no right subtree
         //   easy: make right subtree of left
-        Node<E> pred = left.right();
+        Node<V> pred = left.right();
         if (pred.isEmpty())
         {
             left.setRight(right);
@@ -166,7 +151,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
         // General case, slide down left tree
         //   harder: successor of root becomes new root
         //           parent always points to parent of predecessor
-        Node<E> parent = left;
+        Node<V> parent = left;
         while (!pred.right().isEmpty())
         {
             parent = pred;
@@ -195,11 +180,11 @@ public class BinarySearchTree<E extends Comparable<E>> {
 //
 //    }
 
-//    protected Node<E> predecessor(Node<E> node){
+//    protected Node<V> predecessor(Node<V> node){
 //
 //    }
 //
-//    protected Node<E> successor(Node<E> node){
+//    protected Node<V> successor(Node<V> node){
 //
 //    }
 }

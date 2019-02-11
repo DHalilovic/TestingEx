@@ -4,8 +4,6 @@ import java.util.Iterator;
 
 public class AVLTree<V extends Comparable<V>>  extends BinarySearchTree<V>{
 
-    protected Node<V> root;
-
     // returns true if (id, val) pair was added to tree.
     public boolean add(Integer id, V val) {
         Node<V> newNode = new Node<V>(id, val,EMPTY,EMPTY);

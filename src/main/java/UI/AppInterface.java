@@ -49,12 +49,6 @@ public class AppInterface extends Interface {
     }
 
     private void setPanel(int panelIndex, String btnLabel, boolean addPanel) {
-        // Display textfield for 'id' attribute:
-        JLabel idLabel = new JLabel("Id:");
-        JTextField idTextField = new JTextField(20);
-        idLabel.setLabelFor(idTextField);
-
-
         // textfield for 'name' attribute:
         JLabel nameLabel = new JLabel("Name:");
         JTextField nameTextField = new JTextField(20);
@@ -82,10 +76,6 @@ public class AppInterface extends Interface {
 
         String[] operators = new String[] {"==", "!=", "<",
                 "<=", ">", ">="};
-
-        panels[panelIndex].add(idLabel);
-        if(!addPanel) panels[panelIndex].add(new JComboBox<String>(operators));
-        panels[panelIndex].add(idTextField);
 
         panels[panelIndex].add(nameLabel);
         if(!addPanel) panels[panelIndex].add(new JComboBox<String>(operators));

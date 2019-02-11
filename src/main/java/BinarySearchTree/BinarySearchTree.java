@@ -105,30 +105,38 @@ public class BinarySearchTree<E extends Comparable<E>> {
         return root;
     }
 
-    public E remove( Integer id, E val ){
+    public Integer remove( Integer id, E val ){
         if (isEmpty()) return null;
 
         if (val.equals(root.value())) // delete root value
         {
-            Node<E> newroot = removeTop(root);
-            size--;
-            E result = root.value();
-            root = newroot;
-            return result;
+            if(root.ids.size() < 2) {
+                Node<E> newroot = removeTop(root);
+                size--;
+                E result = root.value();
+                root = newroot;
+            } else {
+                root.ids.remove(id);
+            }
+            return id;
         }
         else
         {
             Node<E> location = search(root,val);
 
             if (val.equals(location.value())) {
-                size--;
-                Node<E> parent = location.parent();
-                if (parent.right() == location) {
-                    parent.setRight(removeTop(location));
+                if(location.ids.size() < 2) {
+                    size--;
+                    Node<E> parent = location.parent();
+                    if (parent.right() == location) {
+                        parent.setRight(removeTop(location));
+                    } else {
+                        parent.setLeft(removeTop(location));
+                    }
                 } else {
-                    parent.setLeft(removeTop(location));
+                    location.ids.remove(id);
                 }
-                return location.value();
+                return id;
             }
         }
         return null;

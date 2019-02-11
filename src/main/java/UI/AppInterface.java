@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 public class AppInterface extends Interface {
 
-    protected JPanel[] panels;
     protected JTable table;
     protected AppDatabase db;
 
@@ -28,16 +27,13 @@ public class AppInterface extends Interface {
 
         frame.setLayout(new GridLayout(2, 1));
 
-        panels = new JPanel[2];
-
-        setPanel();
-
-        setTextArea();
+        frame.getContentPane().add(setPanel());
+        frame.getContentPane().add(setTextArea());
 
         frame.setVisible(true);
     }
 
-    private void setPanel() {
+    private JPanel setPanel() {
         // textfield for 'name' attribute:
         JLabel nameLabel = new JLabel("Name:");
         JTextField nameTextField = new JTextField(20);
@@ -62,39 +58,39 @@ public class AppInterface extends Interface {
         JLabel successLabel = new JLabel("Result: ");
 
         // Add all attributes to panels:
-        panels[0] = new JPanel();
-        panels[0].setLayout(new FlowLayout());
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout());
 
         String[] operators = new String[]{"==", "!=", "<",
                 "<=", ">", ">="};
 
-        panels[0].add(nameLabel);
-        panels[0].add(nameTextField);
+        panel.add(nameLabel);
+        panel.add(nameTextField);
 
-        panels[0].add(goodLabel);
-        panels[0].add(goodCheckBox);
+        panel.add(goodLabel);
+        panel.add(goodCheckBox);
 
-        panels[0].add(lengthLabel);
-        panels[0].add(lengthTextField);
+        panel.add(lengthLabel);
+        panel.add(lengthTextField);
 
-        panels[0].add(addBtn);
-        panels[0].add(deleteBtn);
-        panels[0].add(findBtn);
-        panels[0].add(successLabel);
+        panel.add(addBtn);
+        panel.add(deleteBtn);
+        panel.add(findBtn);
+        panel.add(successLabel);
 
-        frame.getContentPane().add(panels[0]);
+        return panel;
     }
 
-    private void setTextArea() {
-        panels[1] = new JPanel();
-        panels[1].setPreferredSize(new Dimension(200, 250));
+    private JPanel setTextArea() {
+        JPanel panel = new JPanel();
+        //panels[1].setPreferredSize(new Dimension(200, 250));
         table = new JTable(new RecordTableModel());
 
         JScrollPane vertical = new JScrollPane(table);
         vertical.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        panels[1].add(vertical);
+        panel.add(vertical);
 
-        frame.getContentPane().add(panels[1]);
+        return panel;
     }
 
     public class RecordTableModel extends AbstractTableModel {

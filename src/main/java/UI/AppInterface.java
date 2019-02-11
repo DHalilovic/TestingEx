@@ -25,7 +25,7 @@ public class AppInterface extends Interface {
         frame.setSize(width, height);
         frame.setLocation(0, 0);
 
-        frame.setLayout(new GridLayout(2, 1));
+        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 
         frame.getContentPane().add(setPanel());
         frame.getContentPane().add(setTextArea());

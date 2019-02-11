@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class AppInterface extends Interface {
 
     protected JPanel[] panels;
-    protected JTextArea textArea;
+    protected JTable table;
     protected AppDatabase db;
 
     public AppInterface() {
@@ -88,9 +88,9 @@ public class AppInterface extends Interface {
     private void setTextArea() {
         panels[1] = new JPanel();
         panels[1].setPreferredSize(new Dimension(200, 250));
-        textArea = new JTextArea(10, 100);
+        table = new JTable(new RecordTableModel());
 
-        JScrollPane vertical = new JScrollPane(textArea);
+        JScrollPane vertical = new JScrollPane(table);
         vertical.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         panels[1].add(vertical);
 
@@ -101,6 +101,10 @@ public class AppInterface extends Interface {
 
         private final String[] columns = {"Name", "Good", "Length"};
         private ArrayList<Record> data;
+
+        public RecordTableModel() {
+            data = new ArrayList<Record>();
+        }
 
         public int getRowCount() {
             int size;
@@ -133,6 +137,10 @@ public class AppInterface extends Interface {
             }
 
             return val;
+        }
+
+        public String getColumnName(int col) {
+            return columns[col];
         }
 
         public Class getColumnClass(int columnIndex) {

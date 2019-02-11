@@ -1,8 +1,8 @@
 package BinarySearchTree;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Set;
 
 public class BinarySearchTree<E extends Comparable<E>> {
     protected int size;
@@ -63,7 +63,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
     }
 
     // if val exists in tree, return the list of the ids for the records that store val.
-    public ArrayList<Integer> get(E val){
+    public Set<Integer> get(E val){
         if (root.isEmpty()) return null;
 
         Node<E> possibleLocation = search(root,val);
@@ -105,7 +105,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
         return root;
     }
 
-    public E remove( E val ){
+    public E remove( Integer id, E val ){
         if (isEmpty()) return null;
 
         if (val.equals(root.value())) // delete root value

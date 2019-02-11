@@ -135,7 +135,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
     }
 
     protected Node<E> removeTop(Node<E> top){
-        // removeById topmost Node from a binary search tree
+        // remove topmost Node from a binary search tree
         Node<E> left  = top.left();
         Node<E> right = top.right();
         // disconnect top node

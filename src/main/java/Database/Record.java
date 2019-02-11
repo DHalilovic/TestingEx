@@ -5,7 +5,7 @@ public class Record implements Comparable<Record>
     private int id;
     private String name;
     private boolean good;
-    private int length;
+    private Integer length;
 
     public Record(String name, boolean good, int length) {
         this.name = name;
@@ -46,6 +46,6 @@ public class Record implements Comparable<Record>
     }
 
     public int compareTo(Record o) {
-        return name.compareTo(o.getName());
+        return length.compareTo(o.getLength());
     }
 }

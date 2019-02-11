@@ -26,12 +26,12 @@ public class AppDatabase extends Database {
         return r;
     }
 
-    public Record removeById(int id) {
-        tree.remove(id);
-        return records.remove(id);
+    public Record remove(Record r) {
+        tree.remove(r.getId(), r.getLength()); // Remove id from tree
+        return records.remove(r.getId()); // Remove id from records
     }
 
-    public List<Record> filter(Record record) {
+    public List<Record> get(Record record) {
         return null;
     }
 }

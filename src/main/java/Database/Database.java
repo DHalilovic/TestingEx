@@ -18,9 +18,9 @@ public abstract class Database {
 
     abstract Record add(Record r);
 
-    abstract Record removeById(int id);
+    abstract Record remove(Record r);
 
     abstract Record getById(int id);
 
-    abstract List<Record> filter(Record record);
+    abstract List<Record> get(Record record);
 }

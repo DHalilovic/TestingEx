@@ -1,13 +1,13 @@
 package UI;
 
-import Database.AppDatabase;
+import Database.*;
 
 import javax.swing.JFrame;
 
 public abstract class Interface {
 
     protected JFrame frame;
-    protected AppDatabase db;
+    protected Database db;
 
     public Interface() {
         frame = new JFrame("Graphical User Interface");

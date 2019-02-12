@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class AppDatabase extends Database {
 
+    @Override
     public Record add(Record r) {
         // Increment if current id not available/unique
         while (records.containsKey(idCounter)) {
@@ -18,19 +19,23 @@ public class AppDatabase extends Database {
         return r;
     }
 
+    @Override
     public Record remove(Record r) {
         tree.remove(r.getId(), r.getLength()); // Remove id from tree
         return records.remove(r.getId()); // Remove id from records
     }
 
+    @Override
     public Record get(Record r) {
         return records.get(r.getId());
     }
 
+    @Override
     public Record get(int id) {
         return records.get(id);
     }
 
+    @Override
     public ArrayList<Record> filter(Record r) {
         // Initialize result
         ArrayList<Record> result = new ArrayList<Record>();

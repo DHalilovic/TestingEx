@@ -40,30 +40,6 @@ public class AppInterface extends Interface {
         // Initialize tab pane
         JTabbedPane tabbedPane = new JTabbedPane();
 
-        JButton deleteBtn = new JButton("Delete record");
-        JButton findBtn = new JButton("Find record");
-
-/*        // Assign button listeners:
-        findBtn.addActionListener(
-                new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        // Check for valid input
-                        String name = (nameTextField.getText().length() > 0) ? nameTextField.getText() : null;
-                        Integer length = (lengthTextField.getText().length() > 0) ? Integer.parseInt(lengthTextField.getText()) : null;
-
-                        // Parse dummy record used for searching
-                        Record r = new Record(
-                                name,
-                                goodCheckBox.isSelected(),
-                                length
-                        );
-
-                        // Retrieve filtered records from database
-                        model.setData(db.filter(r));
-                    }
-                }
-        );*/
-
         // Add success label:
         JLabel successLabel = new JLabel("Result: ");
 

@@ -91,6 +91,7 @@ public class AppInterface extends Interface {
         panel.add(successLabel);*/
 
         tabbedPane.add("Add", initAddPanel());
+        tabbedPane.add("Find", initFindPanel());
 
         panel.add(tabbedPane);
 
@@ -98,8 +99,9 @@ public class AppInterface extends Interface {
     }
 
     private JPanel initAddPanel() {
-        JPanel addPanel = new JPanel();
-        addPanel.setLayout(new FlowLayout());
+        // Initialize panel
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout());
 
         // textfield for 'name' attribute:
         JLabel nameLabel = new JLabel("Name:");
@@ -143,15 +145,47 @@ public class AppInterface extends Interface {
                 }
         );
 
-        addPanel.add(nameLabel);
-        addPanel.add(nameTextField);
-        addPanel.add(goodLabel);
-        addPanel.add(goodCheckBox);
-        addPanel.add(lengthLabel);
-        addPanel.add(lengthTextField);
-        addPanel.add(addBtn);
+        // Add components to panel
+        panel.add(nameLabel);
+        panel.add(nameTextField);
+        panel.add(goodLabel);
+        panel.add(goodCheckBox);
+        panel.add(lengthLabel);
+        panel.add(lengthTextField);
+        panel.add(addBtn);
 
-        return addPanel;
+        return panel;
+    }
+
+    private JPanel initFindPanel() {
+        // Initialize panel
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        // Create radio buttons
+        JRadioButton nameButton = new JRadioButton("Name");
+        nameButton.setActionCommand("n");
+
+        JRadioButton goodButton = new JRadioButton("Good");
+        goodButton.setActionCommand("g");
+
+        JRadioButton lengthButton = new JRadioButton("Length");
+        lengthButton.setActionCommand("l");
+
+        // Group radio buttons
+        ButtonGroup group = new ButtonGroup();
+        group.add(nameButton);
+        group.add(goodButton);
+        group.add(lengthButton);
+
+        // Register listener for radio buttons
+
+        // Add components to panel
+        panel.add(nameButton);
+        panel.add(goodButton);
+        panel.add(lengthButton);
+
+        return panel;
     }
 
     private JPanel setTextArea() {

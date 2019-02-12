@@ -32,20 +32,28 @@ public class BinarySearchTree<V extends Comparable<V>> {
             root = newNode;
         } else {
             Node<V> insertLocation = search(root,val);
-            V nodeValue = insertLocation.value();
-            // The location returned is the successor or predecessor
-            // of the to-be-inserted value
-            int compare = ordering.compare(nodeValue, val);
-            if(compare == 0){ // if val == nodeValue
-                return insertLocation.ids.add(id);
-            }
-            else if (compare < 0) { // if value > nodeValue
-                insertLocation.setRight(newNode);
-            } else { // if value < nodeValue
-                insertLocation.setLeft(newNode);
-            }
+            return add(id, newNode, insertLocation);
         }
         size++;
+        return true;
+    }
+
+    // returns true if (id, val) pair was added to tree.
+    protected boolean add( Integer id, Node<V> newNode, Node<V> insertLocation ){
+        V nodeValue = insertLocation.value();
+        V val = newNode.val;
+        // The location returned is the successor or predecessor
+        // of the to-be-inserted value
+        int compare = ordering.compare(nodeValue, val);
+        if(compare == 0){ // if val == nodeValue
+            return insertLocation.ids.add(id);
+        }
+        else if (compare < 0) { // if value > nodeValue
+            insertLocation.setRight(newNode);
+        } else { // if value < nodeValue
+            insertLocation.setLeft(newNode);
+        }
+
         return true;
     }
 

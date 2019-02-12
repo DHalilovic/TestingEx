@@ -15,19 +15,13 @@ public class AVLTree<V extends Comparable<V>>  extends BinarySearchTree<V>{
             root = newNode;
         } else {
             Node<V> insertLocation = search(root,val);
-            V nodeValue = insertLocation.value();
-            // The location returned is the successor or predecessor
-            // of the to-be-inserted value
-            int compare = ordering.compare(nodeValue, val);
-            if(compare == 0){ // if val == nodeValue
-                return insertLocation.ids.add(id);
+            int initialSize = insertLocation.ids.size();
+
+            if(add(id, newNode, insertLocation) &&
+                    initialSize == insertLocation.ids.size()){
+                // A new node has been added.
+                rebalance(insertLocation);
             }
-            else if (compare < 0) { // if value > nodeValue
-                insertLocation.setRight(newNode);
-            } else { // if value < nodeValue
-                insertLocation.setLeft(newNode);
-            }
-            rebalance(insertLocation);
         }
         size++;
         return true;
@@ -69,13 +63,13 @@ public class AVLTree<V extends Comparable<V>>  extends BinarySearchTree<V>{
     }
 
     protected void rebalance(Node<V> n) {
-        if (getBalance(n) == -2) {
+        if (getBalance(n) <= -2) {
             if (n.left().left().height() >= n.left().right().height())
                 n = rotateRight(n);
             else
                 n = rotateLeftThenright(n);
 
-        } else if (getBalance(n) == 2) {
+        } else if (getBalance(n) >= 2) {
             if (n.right().right().height() >= n.right().left().height())
                 n = rotateLeft(n);
             else

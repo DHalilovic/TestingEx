@@ -15,7 +15,6 @@ public class AppInterface extends Interface {
 
     protected JTable table;
     protected RecordTableModel model;
-    protected AppDatabase db;
 
     public AppInterface() {
         super();

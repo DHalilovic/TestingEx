@@ -1,6 +1,6 @@
 package Database;
 
-import BinarySearchTree.BinarySearchTree;
+import BinarySearchTree.AVLTree;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -10,11 +10,11 @@ public abstract class Database {
 
     protected int idCounter; // Tracks next valid id
     protected LinkedHashMap<Integer, Record> records; // References records by id
-    protected BinarySearchTree<Integer> tree; // Sorts records for optimized(?) filtering
+    protected AVLTree<Integer> tree; // Sorts records for optimized(?) filtering
 
     public Database() {
         records = new LinkedHashMap<Integer, Record>();
-        tree = new BinarySearchTree<Integer>();
+        tree = new AVLTree<Integer>();
     }
 
     abstract Record add(Record r);

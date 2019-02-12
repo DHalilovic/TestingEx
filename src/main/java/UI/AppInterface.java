@@ -38,9 +38,8 @@ public class AppInterface extends Interface {
     }
 
     private JPanel setPanel() {
-        // Tab pane
+        // Initialize tab pane
         JTabbedPane tabbedPane = new JTabbedPane();
-
 
         JButton deleteBtn = new JButton("Delete record");
         JButton findBtn = new JButton("Find record");
@@ -162,28 +161,71 @@ public class AppInterface extends Interface {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-        // Create radio buttons
-        JRadioButton nameButton = new JRadioButton("Name");
-        nameButton.setActionCommand("n");
+        // Initialize tabbed pane
+        JTabbedPane tabbedPane = new JTabbedPane();
 
-        JRadioButton goodButton = new JRadioButton("Good");
-        goodButton.setActionCommand("g");
+        // Initialize name panel
+        Panel namePanel = new Panel();
+        namePanel.setLayout(new FlowLayout());
 
-        JRadioButton lengthButton = new JRadioButton("Length");
-        lengthButton.setActionCommand("l");
+        // textfield for 'name' attribute:
+        JLabel nameLabel = new JLabel("Name:");
+        final JTextField nameTextField = new JTextField(20);
+        nameLabel.setLabelFor(nameTextField);
 
-        // Group radio buttons
-        ButtonGroup group = new ButtonGroup();
-        group.add(nameButton);
-        group.add(goodButton);
-        group.add(lengthButton);
+        // button for 'name' attribute
+        JButton findNameBtn = new JButton("Find");
+        findNameBtn.addActionListener(null);
 
-        // Register listener for radio buttons
+        // Add components to name panel
+        namePanel.add(nameLabel);
+        namePanel.add(nameTextField);
+        namePanel.add(findNameBtn);
+
+        // Initialize length panel
+        Panel lengthPanel = new Panel();
+        lengthPanel.setLayout(new FlowLayout());
+
+        // textfield for 'length' attribute:
+        JLabel lengthLabel = new JLabel("Length:");
+        final JFormattedTextField lengthTextField = new JFormattedTextField(NumberFormat.getIntegerInstance());
+        lengthTextField.setColumns(20);
+        lengthLabel.setLabelFor(lengthTextField);
+
+        // button for 'length' attribute
+        JButton findLengthBtn = new JButton("Find");
+        findLengthBtn.addActionListener(null);
+
+        // Add components to length panel
+        lengthPanel.add(lengthLabel);
+        lengthPanel.add(lengthTextField);
+        lengthPanel.add(findLengthBtn);
+
+        // Initialize good panel
+        Panel goodPanel= new Panel();
+        goodPanel.setLayout(new FlowLayout());
+
+        // checkbox for 'good' attribute:
+        JLabel goodLabel = new JLabel("Good?:");
+        final JCheckBox goodCheckBox = new JCheckBox();
+        goodLabel.setLabelFor(goodCheckBox);
+
+        // button for 'good' attribute
+        JButton findGoodBtn = new JButton("Find");
+        findGoodBtn.addActionListener(null);
+
+        // Add components to good panel
+        goodPanel.add(goodLabel);
+        goodPanel.add(goodCheckBox);
+        goodPanel.add(findGoodBtn);
+
+        // Add tabs to tabbed pane
+        tabbedPane.add("Name", namePanel);
+        tabbedPane.add("Good", goodPanel);
+        tabbedPane.add("Length", lengthPanel);
 
         // Add components to panel
-        panel.add(nameButton);
-        panel.add(goodButton);
-        panel.add(lengthButton);
+        panel.add(tabbedPane);
 
         return panel;
     }

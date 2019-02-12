@@ -74,6 +74,9 @@ public class AppInterface extends Interface {
                             );
                             // Add record to database
                             db.add(r);
+                        } else
+                        {
+                            JOptionPane.showMessageDialog(frame, "All items must be filled.", "Error", JOptionPane.WARNING_MESSAGE);
                         }
                     }
                 }

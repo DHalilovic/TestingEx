@@ -38,6 +38,12 @@ public class AppInterface extends Interface {
     }
 
     private JPanel setPanel() {
+       // Tab pane
+        JTabbedPane tabbedPane = new JTabbedPane();
+
+        JPanel addPanel = new JPanel();
+        addPanel.setLayout(new FlowLayout());
+
         // textfield for 'name' attribute:
         JLabel nameLabel = new JLabel("Name:");
         final JTextField nameTextField = new JTextField(20);
@@ -54,12 +60,10 @@ public class AppInterface extends Interface {
         lengthTextField.setColumns(20);
         lengthLabel.setLabelFor(lengthTextField);
 
-        // Create buttons:
+        // Create add button:
         JButton addBtn = new JButton("Add record");
-        JButton deleteBtn = new JButton("Delete record");
-        JButton findBtn = new JButton("Find record");
 
-        // Assign button listeners:
+        // Assign add button listener:
         addBtn.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
@@ -74,13 +78,24 @@ public class AppInterface extends Interface {
                             );
                             // Add record to database
                             db.add(r);
-                        } else
+                        } else // Otherwise warn user that all inputs must be filled
                         {
                             JOptionPane.showMessageDialog(frame, "All items must be filled.", "Error", JOptionPane.WARNING_MESSAGE);
                         }
                     }
                 }
         );
+
+        addPanel.add(nameLabel);
+        addPanel.add(nameTextField);
+        addPanel.add(goodLabel);
+        addPanel.add(goodCheckBox);
+        addPanel.add(lengthLabel);
+        addPanel.add(lengthTextField);
+        addPanel.add(addBtn);
+
+        JButton deleteBtn = new JButton("Delete record");
+        JButton findBtn = new JButton("Find record");
 
         // Assign button listeners:
         findBtn.addActionListener(
@@ -99,7 +114,6 @@ public class AppInterface extends Interface {
 
                         // Retrieve filtered records from database
                         model.setData(db.filter(r));
-
                     }
                 }
         );
@@ -114,7 +128,7 @@ public class AppInterface extends Interface {
         String[] operators = new String[]{"==", "!=", "<",
                 "<=", ">", ">="};
 
-        panel.add(nameLabel);
+        /*panel.add(nameLabel);
         panel.add(nameTextField);
 
         panel.add(goodLabel);
@@ -126,7 +140,11 @@ public class AppInterface extends Interface {
         panel.add(addBtn);
         panel.add(deleteBtn);
         panel.add(findBtn);
-        panel.add(successLabel);
+        panel.add(successLabel);*/
+
+        tabbedPane.add("Add", addPanel);
+
+        panel.add(tabbedPane);
 
         return panel;
     }

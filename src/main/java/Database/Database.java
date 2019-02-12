@@ -1,29 +1,34 @@
 package Database;
 
 import BinarySearchTree.AVLTree;
+import BinarySearchTree.BinarySearchTree;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 
 public abstract class Database {
 
     protected int idCounter; // Tracks next valid id
     protected LinkedHashMap<Integer, Record> records; // References records by id
-    protected AVLTree<Integer> tree; // Sorts records for optimized(?) filtering
+    protected BinarySearchTree<Integer> tree; // Sorts records for optimized(?) filtering
 
-    public Database() {
-        records = new LinkedHashMap<Integer, Record>();
-        tree = new AVLTree<Integer>();
+    public Database(){
+        this(new LinkedHashMap<Integer, Record>(),
+                new AVLTree<Integer>());
     }
 
-    abstract Record add(Record r);
+    public Database(LinkedHashMap<Integer, Record> records, BinarySearchTree<Integer> tree) {
+        this.records = records;
+        this.tree = tree;
+    }
 
-    abstract Record remove(Record r);
+    public abstract Record add(Record r);
 
-    abstract Record get(Record r);
+    public abstract Record remove(Record r);
 
-    abstract Record get(int id);
+    public abstract Record get(Record r);
 
-    abstract ArrayList<Record> filter(Record r);
+    public abstract Record get(int id);
+
+    public abstract ArrayList<Record> filter(Record r);
 }

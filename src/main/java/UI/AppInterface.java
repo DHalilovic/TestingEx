@@ -174,14 +174,16 @@ public class AppInterface extends Interface {
 
         // button for 'name' attribute
         JButton findNameBtn = new JButton("Find");
-        findNameBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (nameTextField.getText().length() > 0)
-                    model.setData(db.filter(new Record(nameTextField.getText(), null, null)));
-                else
-                    JOptionPane.showMessageDialog(frame, "Must provide name.", "Error", JOptionPane.WARNING_MESSAGE);
-            }
-        });
+        findNameBtn.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        if (nameTextField.getText().length() > 0)
+                            model.setData(db.filter(new Record(nameTextField.getText(), null, null)));
+                        else
+                            JOptionPane.showMessageDialog(frame, "Must provide name.", "Error", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
+        );
 
         // Add components to name panel
         namePanel.add(nameLabel);
@@ -200,7 +202,20 @@ public class AppInterface extends Interface {
 
         // button for 'length' attribute
         JButton findLengthBtn = new JButton("Find");
-        findLengthBtn.addActionListener(null);
+        findLengthBtn.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        try {
+                            if (lengthTextField.getText().length() > 0)
+                                model.setData(db.filter(new Record(null, null, Integer.parseInt(lengthTextField.getText()))));
+                            else
+                                JOptionPane.showMessageDialog(frame, "Must provide length.", "Error", JOptionPane.WARNING_MESSAGE);
+                        } catch (NumberFormatException ex) {
+                            JOptionPane.showMessageDialog(frame, "Length must be integer.", "Error", JOptionPane.WARNING_MESSAGE);
+                        }
+                    }
+                }
+        );
 
         // Add components to length panel
         lengthPanel.add(lengthLabel);
@@ -208,7 +223,7 @@ public class AppInterface extends Interface {
         lengthPanel.add(findLengthBtn);
 
         // Initialize good panel
-        Panel goodPanel= new Panel();
+        Panel goodPanel = new Panel();
         goodPanel.setLayout(new FlowLayout());
 
         // checkbox for 'good' attribute:

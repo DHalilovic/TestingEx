@@ -64,9 +64,14 @@ public class AppInterface extends Interface {
                 new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         // Check for valid input
-                        if (lengthTextField.getText().length() > 0) {
+                        // If all inputs filled, add record
+                        if (nameTextField.getText().length() > 0 && lengthTextField.getText().length() > 0) {
                             // Parse record
-                            Record r = new Record(nameTextField.getText(), goodCheckBox.isSelected(), Integer.parseInt(lengthTextField.getText()));
+                            Record r = new Record(
+                                    nameTextField.getText(),
+                                    goodCheckBox.isSelected(),
+                                    Integer.parseInt(lengthTextField.getText())
+                            );
                             // Add record to database
                             db.add(r);
                         }
@@ -79,12 +84,19 @@ public class AppInterface extends Interface {
                 new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         // Check for valid input
-                        if (lengthTextField.getText().length() > 0) {
-                            // Parse record
-                            Record r = new Record(nameTextField.getText(), goodCheckBox.isSelected(), Integer.parseInt(lengthTextField.getText()));
-                            // Retrieve filtered records from database
-                            model.setData(db.filter(r));
-                        }
+                        String name = (nameTextField.getText().length() > 0) ? nameTextField.getText() : null;
+                        Integer length = (lengthTextField.getText().length() > 0) ? Integer.parseInt(lengthTextField.getText()) : null;
+
+                        // Parse dummy record used for searching
+                        Record r = new Record(
+                                name,
+                                goodCheckBox.isSelected(),
+                                length
+                        );
+
+                        // Retrieve filtered records from database
+                        model.setData(db.filter(r));
+
                     }
                 }
         );

@@ -7,7 +7,7 @@ public class Record implements Comparable<Record>
     private boolean good;
     private Integer length;
 
-    public Record(String name, boolean good, int length) {
+    public Record(String name, boolean good, Integer length) {
         this.name = name;
         this.good = good;
         this.length = length;

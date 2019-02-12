@@ -32,6 +32,28 @@ public class AppDatabase extends Database {
     }
 
     public ArrayList<Record> filter(Record r) {
-        return null;
+        // Initialize result
+        ArrayList<Record> result = new ArrayList<Record>();
+
+        // Filter by which attribute is provided
+        // Only one attributed can be provided per action via UI
+        if (r.getName() != null) {
+            // Add records whose names contain query
+            for (Record t : records.values()) {
+                if (t.getName().contains(r.getName()))
+                    result.add(t);
+            }
+        } else if (r.getLength() != null) {
+            // Filter by tree
+            // TODO filter by tree
+        } else { // Otherwise 'good' attribute provided
+            // Add records with boolean values matching query
+            for (Record t : records.values()) {
+                if (t.isGood().equals(r.isGood()))
+                    result.add(t);
+            }
+        }
+
+        return result;
     }
 }

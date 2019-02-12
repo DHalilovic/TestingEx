@@ -1,8 +1,17 @@
 package BinarySearchTree;
 
+import java.util.Comparator;
 import java.util.Iterator;
 
 public class AVLTree<V extends Comparable<V>>  extends BinarySearchTree<V>{
+
+    public AVLTree() {
+        super();
+    }
+
+    public AVLTree(Comparator<V> alternateOrder) {
+        super(alternateOrder);
+    }
 
     // returns true if (id, val) pair was added to tree.
     public boolean add(Integer id, V val) {

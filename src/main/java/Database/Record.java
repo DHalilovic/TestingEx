@@ -29,7 +29,7 @@ public class Record implements Comparable<Record>
         this.name = name;
     }
 
-    public boolean isGood() {
+    public Boolean isGood() {
         return good;
     }
 
@@ -37,7 +37,7 @@ public class Record implements Comparable<Record>
         this.good = good;
     }
 
-    public int getLength() {
+    public Integer getLength() {
         return length;
     }
 

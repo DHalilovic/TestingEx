@@ -233,7 +233,13 @@ public class AppInterface extends Interface {
 
         // button for 'good' attribute
         JButton findGoodBtn = new JButton("Find");
-        findGoodBtn.addActionListener(null);
+        findGoodBtn.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        model.setData(db.filter(new Record(null, goodCheckBox.isSelected(), null)));
+                    }
+                }
+        );
 
         // Add components to good panel
         goodPanel.add(goodLabel);

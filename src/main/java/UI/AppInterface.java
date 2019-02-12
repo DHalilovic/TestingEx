@@ -38,9 +38,66 @@ public class AppInterface extends Interface {
     }
 
     private JPanel setPanel() {
-       // Tab pane
+        // Tab pane
         JTabbedPane tabbedPane = new JTabbedPane();
 
+
+        JButton deleteBtn = new JButton("Delete record");
+        JButton findBtn = new JButton("Find record");
+
+/*        // Assign button listeners:
+        findBtn.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        // Check for valid input
+                        String name = (nameTextField.getText().length() > 0) ? nameTextField.getText() : null;
+                        Integer length = (lengthTextField.getText().length() > 0) ? Integer.parseInt(lengthTextField.getText()) : null;
+
+                        // Parse dummy record used for searching
+                        Record r = new Record(
+                                name,
+                                goodCheckBox.isSelected(),
+                                length
+                        );
+
+                        // Retrieve filtered records from database
+                        model.setData(db.filter(r));
+                    }
+                }
+        );*/
+
+        // Add success label:
+        JLabel successLabel = new JLabel("Result: ");
+
+        // Add all attributes to panels:
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout());
+
+        String[] operators = new String[]{"==", "!=", "<",
+                "<=", ">", ">="};
+
+        /*panel.add(nameLabel);
+        panel.add(nameTextField);
+
+        panel.add(goodLabel);
+        panel.add(goodCheckBox);
+
+        panel.add(lengthLabel);
+        panel.add(lengthTextField);
+
+        panel.add(addBtn);
+        panel.add(deleteBtn);
+        panel.add(findBtn);
+        panel.add(successLabel);*/
+
+        tabbedPane.add("Add", initAddPanel());
+
+        panel.add(tabbedPane);
+
+        return panel;
+    }
+
+    private JPanel initAddPanel() {
         JPanel addPanel = new JPanel();
         addPanel.setLayout(new FlowLayout());
 
@@ -94,59 +151,7 @@ public class AppInterface extends Interface {
         addPanel.add(lengthTextField);
         addPanel.add(addBtn);
 
-        JButton deleteBtn = new JButton("Delete record");
-        JButton findBtn = new JButton("Find record");
-
-        // Assign button listeners:
-        findBtn.addActionListener(
-                new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        // Check for valid input
-                        String name = (nameTextField.getText().length() > 0) ? nameTextField.getText() : null;
-                        Integer length = (lengthTextField.getText().length() > 0) ? Integer.parseInt(lengthTextField.getText()) : null;
-
-                        // Parse dummy record used for searching
-                        Record r = new Record(
-                                name,
-                                goodCheckBox.isSelected(),
-                                length
-                        );
-
-                        // Retrieve filtered records from database
-                        model.setData(db.filter(r));
-                    }
-                }
-        );
-
-        // Add success label:
-        JLabel successLabel = new JLabel("Result: ");
-
-        // Add all attributes to panels:
-        JPanel panel = new JPanel();
-        panel.setLayout(new FlowLayout());
-
-        String[] operators = new String[]{"==", "!=", "<",
-                "<=", ">", ">="};
-
-        /*panel.add(nameLabel);
-        panel.add(nameTextField);
-
-        panel.add(goodLabel);
-        panel.add(goodCheckBox);
-
-        panel.add(lengthLabel);
-        panel.add(lengthTextField);
-
-        panel.add(addBtn);
-        panel.add(deleteBtn);
-        panel.add(findBtn);
-        panel.add(successLabel);*/
-
-        tabbedPane.add("Add", addPanel);
-
-        panel.add(tabbedPane);
-
-        return panel;
+        return addPanel;
     }
 
     private JPanel setTextArea() {

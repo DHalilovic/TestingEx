@@ -28,6 +28,8 @@ public abstract class Database {
 
     public abstract Record remove(Record r);
 
+    public abstract ArrayList<Record> removeAll(Record r);
+
     public abstract Record get(Record r);
 
     public abstract Record get(int id);

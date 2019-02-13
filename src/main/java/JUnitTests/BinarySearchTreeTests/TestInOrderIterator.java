@@ -21,16 +21,19 @@ public class TestInOrderIterator {
 
     @Test
     public void get() throws Exception {
+        setup();
         assertEquals(Integer.valueOf(1), it.get());
     }
 
     @Test
     public void hasNext() throws Exception {
+        setup();
         assertTrue(it.hasNext());
     }
 
     @Test
     public void next() throws Exception {
+        setup();
         assertEquals(Integer.valueOf(1), it.next());
     }
 }

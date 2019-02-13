@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.HashSet;
 import java.util.Set;
+import BinarySearchTree.AVLTree;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -40,6 +41,8 @@ public class TestAVLTree extends TestBinarySearchTree {
     @Test
     public void getBalance() throws Exception {
 
+        BinarySearchTree bst = new AVLTree();
+        boolean b = bst.add(1, 1);
     }
     */
 
@@ -53,6 +56,10 @@ public class TestAVLTree extends TestBinarySearchTree {
         assertFalse(bst.isEmpty());
     }
 
+//        @Test
+//        public void testSize() {
+//            assertEquals(1, bst.size());
+//        }
     @Test
     public void testSize() {
         assertEquals(1, bst.size());

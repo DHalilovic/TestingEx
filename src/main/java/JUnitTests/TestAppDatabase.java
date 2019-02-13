@@ -1,4 +1,4 @@
-package JUnit;
+package JUnitTests;
 
 import Database.AppDatabase;
 import Database.Record;

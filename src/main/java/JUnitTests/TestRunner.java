@@ -4,7 +4,7 @@
  */
 
 
-package JUnit;
+package JUnitTests;
 
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
@@ -16,9 +16,11 @@ public class TestRunner {
         Result result = JUnitCore.runClasses(TestJunit.class);
 
         for (Failure failure : result.getFailures()) {
-            System.out.println(failure.toString());
+            System.out.println("Failure: " + failure.toString());
         }
 
-        System.out.println(result.wasSuccessful());
+        if(result.wasSuccessful()) {
+            System.out.println("Test was a success");
+        }
     }
 }

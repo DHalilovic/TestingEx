@@ -1,6 +1,7 @@
 package UI;
 
 import Database.AppDatabase;
+import Database.Database;
 import Database.Record;
 
 import javax.swing.*;
@@ -11,15 +12,17 @@ import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
+import static org.mockito.Mockito.mock;
+
 public class AppInterface extends Interface {
 
     protected JTable table;
     protected RecordTableModel model;
 
-    public AppInterface() {
+    public AppInterface(boolean mock) {
         super();
 
-        db = new AppDatabase();
+        db = mock ? mock(AppDatabase.class) : new AppDatabase();
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int height = (int) (screenSize.getHeight());

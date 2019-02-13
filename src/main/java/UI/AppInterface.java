@@ -47,23 +47,6 @@ public class AppInterface extends Interface {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
 
-        String[] operators = new String[]{"==", "!=", "<",
-                "<=", ">", ">="};
-
-        /*panel.add(nameLabel);
-        panel.add(nameTextField);
-
-        panel.add(goodLabel);
-        panel.add(goodCheckBox);
-
-        panel.add(lengthLabel);
-        panel.add(lengthTextField);
-
-        panel.add(addBtn);
-        panel.add(deleteBtn);
-        panel.add(findBtn);
-        panel.add(successLabel);*/
-
         tabbedPane.add("Add", initAddPanel());
         tabbedPane.add("Find", initFindPanel());
 

@@ -49,6 +49,7 @@ public class AppInterface extends Interface {
 
         tabbedPane.add("Add", initAddPanel());
         tabbedPane.add("Find", initFindPanel());
+        tabbedPane.add("Delete", initDeletePannel());
 
         panel.add(tabbedPane);
 
@@ -222,6 +223,108 @@ public class AppInterface extends Interface {
                                         )
                                 )
                         );
+                    }
+                }
+        );
+
+        // Add components to good panel
+        goodPanel.add(goodLabel);
+        goodPanel.add(goodCheckBox);
+        goodPanel.add(findGoodBtn);
+
+        // Add tabs to tabbed pane
+        tabbedPane.add("Name", namePanel);
+        tabbedPane.add("Good", goodPanel);
+        tabbedPane.add("Length", lengthPanel);
+
+        // Add components to panel
+        panel.add(tabbedPane);
+
+        return panel;
+    }
+
+    private JPanel initDeletePannel() {
+        // Initialize panel
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        // Initialize tabbed pane
+        JTabbedPane tabbedPane = new JTabbedPane();
+
+        // Initialize name panel
+        Panel namePanel = new Panel();
+        namePanel.setLayout(new FlowLayout());
+
+        // textfield for 'name' attribute:
+        JLabel nameLabel = new JLabel("Name:");
+        final JTextField nameTextField = new JTextField(20);
+        nameLabel.setLabelFor(nameTextField);
+
+        // button for 'name' attribute
+        JButton findNameBtn = new JButton("Delete");
+        findNameBtn.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        if (nameTextField.getText().length() > 0) {
+                            // TODO: implement deletion for any record with given name;
+                        }else
+                            JOptionPane.showMessageDialog(frame, "Must provide name.", "Error", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
+        );
+
+        // Add components to name panel
+        namePanel.add(nameLabel);
+        namePanel.add(nameTextField);
+        namePanel.add(findNameBtn);
+
+        // Initialize length panel
+        Panel lengthPanel = new Panel();
+        lengthPanel.setLayout(new FlowLayout());
+
+        // textfield for 'length' attribute:
+        JLabel lengthLabel = new JLabel("Length:");
+        final JFormattedTextField lengthTextField = new JFormattedTextField(NumberFormat.getIntegerInstance());
+        lengthTextField.setColumns(20);
+        lengthLabel.setLabelFor(lengthTextField);
+
+        // button for 'length' attribute
+        JButton findLengthBtn = new JButton("Delete");
+        findLengthBtn.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        try {
+                            if (lengthTextField.getText().length() > 0) {
+                                // TODO: implement deletion for any record with given length;
+                            }else
+                                JOptionPane.showMessageDialog(frame, "Must provide length.", "Error", JOptionPane.WARNING_MESSAGE);
+                        } catch (NumberFormatException ex) {
+                            JOptionPane.showMessageDialog(frame, "Length must be integer.", "Error", JOptionPane.WARNING_MESSAGE);
+                        }
+                    }
+                }
+        );
+
+        // Add components to length panel
+        lengthPanel.add(lengthLabel);
+        lengthPanel.add(lengthTextField);
+        lengthPanel.add(findLengthBtn);
+
+        // Initialize good panel
+        Panel goodPanel = new Panel();
+        goodPanel.setLayout(new FlowLayout());
+
+        // checkbox for 'good' attribute:
+        JLabel goodLabel = new JLabel("Good?:");
+        final JCheckBox goodCheckBox = new JCheckBox();
+        goodLabel.setLabelFor(goodCheckBox);
+
+        // button for 'good' attribute
+        JButton findGoodBtn = new JButton("Delete");
+        findGoodBtn.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        // TODO: implement deletion for any record with given boolean value;
                     }
                 }
         );

@@ -41,9 +41,9 @@ public class TestRecord {
     public void compareTo() throws Exception {
     }
 
-    @Test
-    public String toString() throws Exception {
-        return null;
-    }
+//    @Test
+//    public String toString() throws Exception {
+//        return null;
+//    }
 
 }

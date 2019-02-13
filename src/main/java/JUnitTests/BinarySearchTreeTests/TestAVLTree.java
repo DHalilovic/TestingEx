@@ -1,6 +1,6 @@
 package JUnitTests.BinarySearchTreeTests;
 
-import BinarySearchTree.BinarySearchTree;
+import BinarySearchTree.*;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 
 public class TestAVLTree {
 
-        BinarySearchTree bst = new BinarySearchTree.AVLTree();
+        BinarySearchTree bst = new AVLTree();
         boolean b = bst.add(1, 1);
 
         @Test

@@ -62,6 +62,7 @@ public class TestBinarySearchTree {
 
     @Test
     public void testClear() throws Exception {
+        bst.clear();
         assertEquals(0, bst.size());
     }
 }

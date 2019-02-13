@@ -36,11 +36,12 @@ public class TestAVLTree extends TestBinarySearchTree {
     @Test
     public void rotateRightThenleft() throws Exception {
     }
-    */
 
     @Test
     public void getBalance() throws Exception {
+
     }
+    */
 
     BinarySearchTree bst = new AVLTree();
     boolean b = bst.add(1, 1);

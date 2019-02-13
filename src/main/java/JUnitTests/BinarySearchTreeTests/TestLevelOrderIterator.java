@@ -35,10 +35,7 @@ public class TestLevelOrderIterator {
 
     @Test
     public void next() throws Exception {
+        setup();
+        assertEquals(Integer.valueOf(1), it.next());
     }
-
-    @Test
-    public void remove() throws Exception {
-    }
-
 }

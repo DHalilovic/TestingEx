@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class AppInterface extends Interface {
 
@@ -186,7 +187,7 @@ public class AppInterface extends Interface {
                                         )
                                 );
                                 model.setData(result);
-                            }else
+                            } else
                                 JOptionPane.showMessageDialog(frame, "Must provide length.", "Error", JOptionPane.WARNING_MESSAGE);
                         } catch (NumberFormatException ex) {
                             JOptionPane.showMessageDialog(frame, "Length must be integer.", "Error", JOptionPane.WARNING_MESSAGE);
@@ -217,9 +218,9 @@ public class AppInterface extends Interface {
                         model.setData(
                                 db.filter(
                                         new Record(
-                                            null,
-                                            goodCheckBox.isSelected(),
-                                            null
+                                                null,
+                                                goodCheckBox.isSelected(),
+                                                null
                                         )
                                 )
                         );
@@ -261,12 +262,19 @@ public class AppInterface extends Interface {
         nameLabel.setLabelFor(nameTextField);
 
         // button for 'name' attribute
-        JButton findNameBtn = new JButton("Delete");
-        findNameBtn.addActionListener(
+        JButton deleteBtnName = new JButton("Delete");
+        deleteBtnName.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         if (nameTextField.getText().length() > 0) {
-                            // TODO: implement deletion for any record with given name;
+                            db.removeAll(
+                                    new Record(
+                                            nameTextField.getText(),
+                                            false,
+                                            null
+                                    )
+                            );
+                            JOptionPane.showMessageDialog(frame, "Done.", "Error", JOptionPane.WARNING_MESSAGE);
                         }else
                             JOptionPane.showMessageDialog(frame, "Must provide name.", "Error", JOptionPane.WARNING_MESSAGE);
                     }
@@ -276,7 +284,7 @@ public class AppInterface extends Interface {
         // Add components to name panel
         namePanel.add(nameLabel);
         namePanel.add(nameTextField);
-        namePanel.add(findNameBtn);
+        namePanel.add(deleteBtnName);
 
         // Initialize length panel
         Panel lengthPanel = new Panel();
@@ -289,13 +297,22 @@ public class AppInterface extends Interface {
         lengthLabel.setLabelFor(lengthTextField);
 
         // button for 'length' attribute
-        JButton findLengthBtn = new JButton("Delete");
-        findLengthBtn.addActionListener(
+        JButton deleteLengthBtn = new JButton("Delete");
+        deleteLengthBtn.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         try {
                             if (lengthTextField.getText().length() > 0) {
-                                // TODO: implement deletion for any record with given length;
+                                db.removeAll(
+                                        new Record(
+                                                null,
+                                                false,
+                                                Integer.parseInt(
+                                                        lengthTextField.getText().replaceAll(",", "")
+                                                )
+                                        )
+                                );
+                                JOptionPane.showMessageDialog(frame, "Done.", "Error", JOptionPane.WARNING_MESSAGE);
                             }else
                                 JOptionPane.showMessageDialog(frame, "Must provide length.", "Error", JOptionPane.WARNING_MESSAGE);
                         } catch (NumberFormatException ex) {
@@ -308,7 +325,7 @@ public class AppInterface extends Interface {
         // Add components to length panel
         lengthPanel.add(lengthLabel);
         lengthPanel.add(lengthTextField);
-        lengthPanel.add(findLengthBtn);
+        lengthPanel.add(deleteLengthBtn);
 
         // Initialize good panel
         Panel goodPanel = new Panel();
@@ -320,11 +337,18 @@ public class AppInterface extends Interface {
         goodLabel.setLabelFor(goodCheckBox);
 
         // button for 'good' attribute
-        JButton findGoodBtn = new JButton("Delete");
-        findGoodBtn.addActionListener(
+        JButton deleteGoodBtn = new JButton("Delete");
+        deleteGoodBtn.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        // TODO: implement deletion for any record with given boolean value;
+                        db.removeAll(
+                                new Record(
+                                        null,
+                                        goodCheckBox.isSelected(),
+                                        null
+                                )
+                        );
+                        JOptionPane.showMessageDialog(frame, "Done.", "Error", JOptionPane.WARNING_MESSAGE);
                     }
                 }
         );
@@ -332,7 +356,7 @@ public class AppInterface extends Interface {
         // Add components to good panel
         goodPanel.add(goodLabel);
         goodPanel.add(goodCheckBox);
-        goodPanel.add(findGoodBtn);
+        goodPanel.add(deleteGoodBtn);
 
         // Add tabs to tabbed pane
         tabbedPane.add("Name", namePanel);
@@ -346,13 +370,56 @@ public class AppInterface extends Interface {
     }
 
     private JPanel setTextArea() {
+        // Initialize panel
         JPanel panel = new JPanel();
-        //panels[1].setPreferredSize(new Dimension(200, 250));
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        // Initialize table
         model = new RecordTableModel();
         table = new JTable(model);
 
+        // Nest table in scroll pane
         JScrollPane vertical = new JScrollPane(table);
         vertical.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+        // Initialize delete button
+        JButton deleteBtn = new JButton("Delete Selected");
+        deleteBtn.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        // Get selected rows
+                        int[] selected = table.getSelectedRows();
+
+                        // Get selected Records
+                        ArrayList<Record> toDelete = new ArrayList<Record>();
+                        ArrayList<Record> data = model.getData();
+
+                        // Get records for removal from database
+                        for (int i : selected)
+                            toDelete.add(data.get(i));
+
+                        // Remove records from database
+                        for (Record r : toDelete) {
+                            db.remove(r);
+                        }
+
+                        // Remove records from table model
+                        int offset = 0; // Offset considering deleted indices
+                        for (int i : selected) {
+                            i -= offset; // Adjust target index by offset
+                            data.remove(i); // Remove record by index
+                            offset++; // Increment offset
+                        }
+
+                        // Update table
+                        model.fireTableDataChanged();
+                        //System.out.println(Arrays.toString(selected));
+                    }
+                }
+        );
+
+        // Prepare panel
+        panel.add(deleteBtn);
         panel.add(vertical);
 
         return panel;

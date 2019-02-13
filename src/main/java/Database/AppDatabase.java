@@ -13,6 +13,7 @@ public class AppDatabase extends Database {
             idCounter++;
         }
 
+        r.setId(idCounter); // Set record id
         records.put(idCounter, r); // Add record
         tree.add( idCounter, r.getLength() );
 
@@ -28,41 +29,59 @@ public class AppDatabase extends Database {
         return records.remove(r.getId()); // Remove id from records
     }
 
+    @Override
     public ArrayList<Record> removeAll(Record r){
         ArrayList<Record> removed = new ArrayList<Record>();
 
         if(!records.isEmpty()) {
             // Only one attributed can be provided per action via UI
             if (r.getName() != null) {
-                // Delete records whose names equal query
+                ArrayList<Integer> idsToRemove = new ArrayList<Integer>();
+
                 Iterator<Record> it = records.values().iterator();
-                while(it.hasNext()){
+                while(it.hasNext()) {
                     Record t = it.next();
                     if (t.getName().equals(r.getName())) {
-                        Record recordToBeRemoved = records.remove(t.getId());
-                        tree.remove(recordToBeRemoved.getId(), r.getLength());
-                        removed.add(recordToBeRemoved);
+                        idsToRemove.add(t.getId());
                     }
                 }
+
+                for( Integer id : idsToRemove ) {
+                    Record recordToBeRemoved = records.remove(id);
+                    tree.remove(recordToBeRemoved.getId(), r.getLength());
+                    removed.add(recordToBeRemoved);
+                }
             } else if (r.getLength() != null) {
+                ArrayList<Integer> idsToRemove = new ArrayList<Integer>();
+
                 Iterator<Record> it = records.values().iterator();
                 while(it.hasNext()) {
                     Record t = it.next();
                     if (t.getId() == r.getId()) {
-                        Record recordToBeRemoved = records.remove(t.getId());
-                        tree.remove(recordToBeRemoved.getId(), r.getLength());
-                        removed.add(recordToBeRemoved);
+                        idsToRemove.add(t.getId());
                     }
                 }
+
+                for( Integer id : idsToRemove ) {
+                    Record recordToBeRemoved = records.remove(id);
+                    tree.remove(recordToBeRemoved.getId(), r.getLength());
+                    removed.add(recordToBeRemoved);
+                }
             } else { // Otherwise 'good' attribute provided
+                ArrayList<Integer> idsToRemove = new ArrayList<Integer>();
+
                 Iterator<Record> it = records.values().iterator();
                 while(it.hasNext()) {
                     Record t = it.next();
-                    if (t.isGood() == r.isGood()) {
-                        Record recordToBeRemoved = records.remove(t.getId());
-                        tree.remove(recordToBeRemoved.getId(), r.getLength());
-                        removed.add(recordToBeRemoved);
+                    if (t.isGood() == r.isGood() ) {
+                        idsToRemove.add(t.getId());
                     }
+                }
+
+                for( Integer id : idsToRemove ) {
+                    Record recordToBeRemoved = records.remove(id);
+                    tree.remove(recordToBeRemoved.getId(), r.getLength());
+                    removed.add(recordToBeRemoved);
                 }
             }
         }

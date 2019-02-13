@@ -1,17 +1,19 @@
 package Database;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 public class AppDatabase extends Database {
 
     @Override
     public Record add(Record r) {
         // Increment if current id not available/unique
-        while (records.containsKey(idCounter)) {
+        while ( records.containsKey(idCounter) ) {
             idCounter++;
         }
 
         records.put(idCounter, r); // Add record
+        tree.add( idCounter, r.getLength() );
 
         // Increment to next id for easier future use
         idCounter++;
@@ -50,11 +52,14 @@ public class AppDatabase extends Database {
             }
         } else if (r.getLength() != null) {
             // Filter by tree
-            // TODO filter by tree
+            Set<Integer> ids = tree.get(r.getId());
+            for( Integer id : ids ){
+                result.add( records.get(id) );
+            }
         } else { // Otherwise 'good' attribute provided
             // Add records with boolean values matching query
             for (Record t : records.values()) {
-                if (t.isGood().equals(r.isGood()))
+                if ( t.isGood() == r.isGood() )
                     result.add(t);
             }
         }

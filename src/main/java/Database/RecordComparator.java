@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 public class RecordComparator implements Comparator<Integer> {
 
-    private Database db;
+    protected Database db;
 
     public RecordComparator(Database db) {
         this.db = db;

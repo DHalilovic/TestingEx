@@ -154,7 +154,7 @@ public class AppInterface extends Interface {
                 new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         if (nameTextField.getText().length() > 0)
-                            model.setData(db.filter(new Record(nameTextField.getText(), null, null)));
+                            model.setData(db.filter(new Record(nameTextField.getText(), false, null)));
                         else
                             JOptionPane.showMessageDialog(frame, "Must provide name.", "Error", JOptionPane.WARNING_MESSAGE);
                     }
@@ -183,7 +183,7 @@ public class AppInterface extends Interface {
                     public void actionPerformed(ActionEvent e) {
                         try {
                             if (lengthTextField.getText().length() > 0)
-                                model.setData(db.filter(new Record(null, null, Integer.parseInt(lengthTextField.getText()))));
+                                model.setData(db.filter(new Record(null, false, Integer.parseInt(lengthTextField.getText()))));
                             else
                                 JOptionPane.showMessageDialog(frame, "Must provide length.", "Error", JOptionPane.WARNING_MESSAGE);
                         } catch (NumberFormatException ex) {

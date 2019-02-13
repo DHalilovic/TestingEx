@@ -4,10 +4,10 @@ public class Record implements Comparable<Record>
 {
     private int id;
     private String name;
-    private Boolean good;
+    private boolean good;
     private Integer length;
 
-    public Record(String name, Boolean good, Integer length) {
+    public Record(String name, boolean good, Integer length) {
         this.name = name;
         this.good = good;
         this.length = length;
@@ -29,7 +29,7 @@ public class Record implements Comparable<Record>
         this.name = name;
     }
 
-    public Boolean isGood() {
+    public boolean isGood() {
         return good;
     }
 

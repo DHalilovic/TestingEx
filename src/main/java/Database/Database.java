@@ -10,11 +10,13 @@ public abstract class Database {
 
     protected int idCounter; // Tracks next valid id
     protected LinkedHashMap<Integer, Record> records; // References records by id
-    protected BinarySearchTree<Integer> tree; // Sorts records for optimized(?) filtering
+    protected BinarySearchTree<Integer> tree;
+
 
     public Database(){
         this(new LinkedHashMap<Integer, Record>(),
-                new AVLTree<Integer>());
+                new AVLTree<Integer>()
+        );
     }
 
     public Database(LinkedHashMap<Integer, Record> records, BinarySearchTree<Integer> tree) {

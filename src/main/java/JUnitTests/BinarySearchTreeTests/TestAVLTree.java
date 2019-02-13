@@ -10,9 +10,40 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class TestAVLTree {
+public class TestAVLTree extends TestBinarySearchTree {
+    @Test
+    public void add() throws Exception {
+    }
 
-        BinarySearchTree bst = new AVLTree();
+    @Test
+    public void remove() throws Exception {
+    }
+
+    @Test
+    public void rebalance() throws Exception {
+    }
+
+    @Test
+    public void rotateLeft() throws Exception {
+    }
+
+    @Test
+    public void rotateRight() throws Exception {
+    }
+
+    @Test
+    public void rotateLeftThenright() throws Exception {
+    }
+
+    @Test
+    public void rotateRightThenleft() throws Exception {
+    }
+
+    @Test
+    public void getBalance() throws Exception {
+    }
+
+    BinarySearchTree bst = new AVLTree();
         boolean b = bst.add(1, 1);
 
         @Test

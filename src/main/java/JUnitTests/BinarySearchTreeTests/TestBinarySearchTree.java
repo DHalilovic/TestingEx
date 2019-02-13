@@ -10,6 +10,50 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class TestBinarySearchTree {
+    @Test
+    public void add() throws Exception {
+    }
+
+    @Test
+    public void add1() throws Exception {
+    }
+
+    @Test
+    public void clear() throws Exception {
+    }
+
+    @Test
+    public void contains() throws Exception {
+    }
+
+    @Test
+    public void get() throws Exception {
+    }
+
+    @Test
+    public void isEmpty() throws Exception {
+    }
+
+    @Test
+    public void iterator() throws Exception {
+    }
+
+    @Test
+    public void search() throws Exception {
+    }
+
+    @Test
+    public void remove() throws Exception {
+    }
+
+    @Test
+    public void removeTop() throws Exception {
+    }
+
+    @Test
+    public void size() throws Exception {
+    }
+
     BinarySearchTree bst = new BinarySearchTree();
     boolean b = bst.add(1, 1);
 

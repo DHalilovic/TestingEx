@@ -1,13 +1,12 @@
-package JUnitTests;
+package JUnitTests.BinarySearchTreeTests;
 
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
-public class TestBinarySearchTreeRunner {
-
+public class TestAVLTreeRunner {
     public static void main(String[] args) {
-        Result result = JUnitCore.runClasses(TestBinarySearchTree.class);
+        Result result = JUnitCore.runClasses(TestAVLTree.class);
 
         for (Failure failure : result.getFailures()) {
             System.out.println("Failure: " + failure.toString());

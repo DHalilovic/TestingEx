@@ -1,4 +1,4 @@
-package JUnitTests;
+package JUnitTests.BinarySearchTreeTests;
 
 import BinarySearchTree.BinarySearchTree;
 import org.junit.Test;

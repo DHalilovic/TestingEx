@@ -5,6 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class TestDatabase {
+    /* Abstract methods. Concrete implementations are tested in TestAppDatabaseRunner.java
     @Test
     public void add() throws Exception {
     }
@@ -24,5 +25,5 @@ public class TestDatabase {
     @Test
     public void filter() throws Exception {
     }
-
+    */
 }

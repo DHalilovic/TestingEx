@@ -12,12 +12,6 @@ import static org.junit.Assert.assertTrue;
 public class TestBinarySearchTree {
 
 
-    /* Protected
-    @Test
-    public void add1() throws Exception {
-    }
-    */
-
     @Test
     public void iterator() throws Exception {
     }
@@ -68,6 +62,7 @@ public class TestBinarySearchTree {
 
     @Test
     public void testClear() throws Exception {
+        bst.clear();
         assertEquals(0, bst.size());
     }
 }

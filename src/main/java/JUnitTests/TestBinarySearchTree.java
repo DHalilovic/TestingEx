@@ -1,5 +1,6 @@
-package BinarySearchTree;
+package JUnitTests;
 
+import BinarySearchTree.BinarySearchTree;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -17,11 +18,6 @@ public class TestBinarySearchTree {
         assertTrue(b);
         assertTrue(bst.contains(1));
         assertFalse(bst.isEmpty());
-    }
-
-    @Test
-    public void testSize() {
-        assertEquals(1, bst.size());
     }
 
     @Test

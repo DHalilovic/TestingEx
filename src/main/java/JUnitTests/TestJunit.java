@@ -4,7 +4,7 @@
  *   used to test if Junit works
  */
 
-package JUnitTest;
+package JUnitTests;
 
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;

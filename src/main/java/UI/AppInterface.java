@@ -90,10 +90,11 @@ public class AppInterface extends Interface {
                             Record r = new Record(
                                     nameTextField.getText(),
                                     goodCheckBox.isSelected(),
-                                    Integer.parseInt(lengthTextField.getText())
+                                    Integer.parseInt(lengthTextField.getText().replaceAll(",", ""))
                             );
                             // Add record to database
                             db.add(r);
+                            JOptionPane.showMessageDialog(frame, "Success!", "Result", JOptionPane.WARNING_MESSAGE);
                         } else // Otherwise warn user that all inputs must be filled
                         {
                             JOptionPane.showMessageDialog(frame, "All items must be filled.", "Error", JOptionPane.WARNING_MESSAGE);
@@ -137,7 +138,15 @@ public class AppInterface extends Interface {
                 new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         if (nameTextField.getText().length() > 0)
-                            model.setData(db.filter(new Record(nameTextField.getText(), false, null)));
+                            model.setData(
+                                    db.filter(
+                                            new Record(
+                                                    nameTextField.getText(),
+                                                    false,
+                                                    null
+                                            )
+                                    )
+                            );
                         else
                             JOptionPane.showMessageDialog(frame, "Must provide name.", "Error", JOptionPane.WARNING_MESSAGE);
                     }
@@ -165,9 +174,18 @@ public class AppInterface extends Interface {
                 new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         try {
-                            if (lengthTextField.getText().length() > 0)
-                                model.setData(db.filter(new Record(null, false, Integer.parseInt(lengthTextField.getText()))));
-                            else
+                            if (lengthTextField.getText().length() > 0) {
+                                ArrayList<Record> result = db.filter(
+                                        new Record(
+                                                null,
+                                                false,
+                                                Integer.parseInt(
+                                                        lengthTextField.getText().replaceAll(",", "")
+                                                )
+                                        )
+                                );
+                                model.setData(result);
+                            }else
                                 JOptionPane.showMessageDialog(frame, "Must provide length.", "Error", JOptionPane.WARNING_MESSAGE);
                         } catch (NumberFormatException ex) {
                             JOptionPane.showMessageDialog(frame, "Length must be integer.", "Error", JOptionPane.WARNING_MESSAGE);
@@ -195,7 +213,15 @@ public class AppInterface extends Interface {
         findGoodBtn.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        model.setData(db.filter(new Record(null, goodCheckBox.isSelected(), null)));
+                        model.setData(
+                                db.filter(
+                                        new Record(
+                                            null,
+                                            goodCheckBox.isSelected(),
+                                            null
+                                        )
+                                )
+                        );
                     }
                 }
         );

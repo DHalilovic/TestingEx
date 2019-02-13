@@ -42,25 +42,29 @@ public class AppDatabase extends Database {
         // Initialize result
         ArrayList<Record> result = new ArrayList<Record>();
 
-        // Filter by which attribute is provided
-        // Only one attributed can be provided per action via UI
-        if (r.getName() != null) {
-            // Add records whose names contain query
-            for (Record t : records.values()) {
-                if (t.getName().contains(r.getName()))
-                    result.add(t);
-            }
-        } else if (r.getLength() != null) {
-            // Filter by tree
-            Set<Integer> ids = tree.get(r.getId());
-            for( Integer id : ids ){
-                result.add( records.get(id) );
-            }
-        } else { // Otherwise 'good' attribute provided
-            // Add records with boolean values matching query
-            for (Record t : records.values()) {
-                if ( t.isGood() == r.isGood() )
-                    result.add(t);
+        if(!records.isEmpty()) {
+            // Filter by which attribute is provided
+            // Only one attributed can be provided per action via UI
+            if (r.getName() != null) {
+                // Add records whose names contain query
+                for (Record t : records.values()) {
+                    if (t.getName().contains(r.getName()))
+                        result.add(t);
+                }
+            } else if (r.getLength() != null) {
+                // Filter by tree
+                Set<Integer> ids = tree.get(r.getLength());
+                if (ids != null && !ids.isEmpty()){
+                    for (Integer id : ids) {
+                        result.add(records.get(id));
+                    }
+                }
+            } else { // Otherwise 'good' attribute provided
+                // Add records with boolean values matching query
+                for (Record t : records.values()) {
+                    if (t.isGood() == r.isGood())
+                        result.add(t);
+                }
             }
         }
 

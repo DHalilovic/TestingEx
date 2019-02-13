@@ -48,4 +48,12 @@ public class Record implements Comparable<Record>
     public int compareTo(Record o) {
         return length.compareTo(o.getLength());
     }
+
+    public String toString(){
+        String idString = "{ Id = " + String.valueOf(this.id) + ", ";
+        String nameString = "Name = " + this.name + ", ";
+        String goodString = "Good = " + String.valueOf(this.good) + ", ";
+        String lengthString = "Length = " + String.valueOf(this.length) + " }";
+        return idString + nameString + goodString + lengthString;
+    }
 }

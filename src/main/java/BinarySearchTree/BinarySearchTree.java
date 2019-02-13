@@ -172,7 +172,7 @@ public class BinarySearchTree<V extends Comparable<V>> {
         return pred;
     }
 
-    protected int size(){
+    public int size(){
         return this.size;
     }
 

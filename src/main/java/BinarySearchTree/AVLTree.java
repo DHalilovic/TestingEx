@@ -1,9 +1,13 @@
 package BinarySearchTree;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.Comparator;
-import java.util.Iterator;
 
 public class AVLTree<V extends Comparable<V>>  extends BinarySearchTree<V>{
+
+    final static Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
 
     public AVLTree() {
         super();
@@ -15,6 +19,7 @@ public class AVLTree<V extends Comparable<V>>  extends BinarySearchTree<V>{
 
     // returns true if (id, val) pair was added to tree.
     public boolean add(Integer id, V val) {
+        logger.error("asdf");
         Node<V> newNode = new Node<V>(id, val,EMPTY,EMPTY);
 
         // add value to binary search tree

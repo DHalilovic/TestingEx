@@ -10,6 +10,31 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class TestBinarySearchTree {
+
+
+    /* Protected
+    @Test
+    public void add1() throws Exception {
+    }
+    */
+
+    @Test
+    public void iterator() throws Exception {
+    }
+
+    /* Protected, not used by other classes
+    @Test
+    public void search() throws Exception {
+    }
+    */
+
+    /* Protected, not used by other classes
+    @Test
+    public void removeTop() throws Exception {
+    }
+
+    */
+
     BinarySearchTree bst = new BinarySearchTree();
     boolean b = bst.add(1, 1);
 
@@ -18,6 +43,7 @@ public class TestBinarySearchTree {
         assertTrue(b);
         assertTrue(bst.contains(1));
         assertFalse(bst.isEmpty());
+        assertEquals(1, bst.size());
     }
 
     @Test
@@ -37,5 +63,11 @@ public class TestBinarySearchTree {
         assertEquals(Integer.valueOf(1), bst.remove(1,1));
         assertFalse(bst.contains(1));
         assertTrue(bst.isEmpty());
+        assertEquals(0, bst.size());
+    }
+
+    @Test
+    public void testClear() throws Exception {
+        assertEquals(0, bst.size());
     }
 }

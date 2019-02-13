@@ -4,8 +4,7 @@ import Database.AppDatabase;
 import Database.Record;
 import Database.Database;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class MockRunner {
 
@@ -23,8 +22,8 @@ public class MockRunner {
         mockedDB.add(r4);
         mockedDB.add(r5);
         mockedDB.remove(r4);
-        mockedDB.get(r1);
-        mockedDB.get(1);
+        when(mockedDB.get(r1)).thenReturn(r1);
+        when(mockedDB.get(1)).thenReturn(r5);
         mockedDB.filter(r2);
 
         verify(mockedDB).add(r1);
@@ -33,9 +32,12 @@ public class MockRunner {
         verify(mockedDB).add(r4);
         verify(mockedDB).add(r5);
         verify(mockedDB).remove(r4);
+        mockedDB.get(r1);
         verify(mockedDB).get(r1);
+        mockedDB.get(1);
         verify(mockedDB).get(1);
         verify(mockedDB).filter(r2);
+        System.out.println(verify(mockedDB).add(r4));
 
     }
 }

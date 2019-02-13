@@ -270,6 +270,7 @@ public class AppInterface extends Interface {
 
         public void setData(ArrayList<Record> data) {
             this.data = data;
+            this.fireTableDataChanged();
         }
 
         public int getRowCount() {

@@ -12,6 +12,7 @@ public class AppDatabase extends Database {
             idCounter++;
         }
 
+        r.setId(idCounter); // Set record id
         records.put(idCounter, r); // Add record
         tree.add( idCounter, r.getLength() );
 

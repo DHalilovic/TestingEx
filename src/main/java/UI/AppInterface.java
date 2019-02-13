@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class AppInterface extends Interface {
 
@@ -186,7 +187,7 @@ public class AppInterface extends Interface {
                                         )
                                 );
                                 model.setData(result);
-                            }else
+                            } else
                                 JOptionPane.showMessageDialog(frame, "Must provide length.", "Error", JOptionPane.WARNING_MESSAGE);
                         } catch (NumberFormatException ex) {
                             JOptionPane.showMessageDialog(frame, "Length must be integer.", "Error", JOptionPane.WARNING_MESSAGE);
@@ -217,9 +218,9 @@ public class AppInterface extends Interface {
                         model.setData(
                                 db.filter(
                                         new Record(
-                                            null,
-                                            goodCheckBox.isSelected(),
-                                            null
+                                                null,
+                                                goodCheckBox.isSelected(),
+                                                null
                                         )
                                 )
                         );
@@ -267,7 +268,7 @@ public class AppInterface extends Interface {
                     public void actionPerformed(ActionEvent e) {
                         if (nameTextField.getText().length() > 0) {
                             // TODO: implement deletion for any record with given name;
-                        }else
+                        } else
                             JOptionPane.showMessageDialog(frame, "Must provide name.", "Error", JOptionPane.WARNING_MESSAGE);
                     }
                 }
@@ -296,7 +297,7 @@ public class AppInterface extends Interface {
                         try {
                             if (lengthTextField.getText().length() > 0) {
                                 // TODO: implement deletion for any record with given length;
-                            }else
+                            } else
                                 JOptionPane.showMessageDialog(frame, "Must provide length.", "Error", JOptionPane.WARNING_MESSAGE);
                         } catch (NumberFormatException ex) {
                             JOptionPane.showMessageDialog(frame, "Length must be integer.", "Error", JOptionPane.WARNING_MESSAGE);
@@ -346,13 +347,56 @@ public class AppInterface extends Interface {
     }
 
     private JPanel setTextArea() {
+        // Initialize panel
         JPanel panel = new JPanel();
-        //panels[1].setPreferredSize(new Dimension(200, 250));
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        // Initialize table
         model = new RecordTableModel();
         table = new JTable(model);
 
+        // Nest table in scroll pane
         JScrollPane vertical = new JScrollPane(table);
         vertical.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+        // Initialize delete button
+        JButton deleteBtn = new JButton("Delete Selected");
+        deleteBtn.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        // Get selected rows
+                        int[] selected = table.getSelectedRows();
+
+                        // Get selected Records
+                        ArrayList<Record> toDelete = new ArrayList<Record>();
+                        ArrayList<Record> data = model.getData();
+
+                        // Get records for removal from database
+                        for (int i : selected)
+                            toDelete.add(data.get(i));
+
+                        // Remove records from database
+                        for (Record r : toDelete) {
+                            db.remove(r);
+                        }
+
+                        // Remove records from table model
+                        int offset = 0; // Offset considering deleted indices
+                        for (int i : selected) {
+                            i -= offset; // Adjust target index by offset
+                            data.remove(i); // Remove record by index
+                            offset++; // Increment offset
+                        }
+
+                        // Update table
+                        model.fireTableDataChanged();
+                        //System.out.println(Arrays.toString(selected));
+                    }
+                }
+        );
+
+        // Prepare panel
+        panel.add(deleteBtn);
         panel.add(vertical);
 
         return panel;

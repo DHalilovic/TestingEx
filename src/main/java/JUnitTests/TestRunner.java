@@ -1,13 +1,19 @@
-package Database;
+/*
+ *   from https://www.tutorialspoint.com/junit/junit_environment_setup.htm
+ *   used to test if Junit works
+ */
+
+
+package JUnitTests;
 
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
-public class TestAppDatabaseRunner {
+public class TestRunner {
 
     public static void main(String[] args) {
-        Result result = JUnitCore.runClasses(TestAppDatabase.class);
+        Result result = JUnitCore.runClasses(TestJunit.class);
 
         for (Failure failure : result.getFailures()) {
             System.out.println("Failure: " + failure.toString());
@@ -17,5 +23,4 @@ public class TestAppDatabaseRunner {
             System.out.println("Test was a success");
         }
     }
-
 }

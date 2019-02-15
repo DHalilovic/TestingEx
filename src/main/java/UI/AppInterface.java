@@ -93,6 +93,7 @@ public class AppInterface extends Interface {
         addBtn.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
+                        logger.info("[AppInterface] Pressed 'add' button");
                         // Check for valid input
                         // If all inputs filled, add record
                         if (nameTextField.getText().length() > 0 && lengthTextField.getText().length() > 0) {
@@ -147,6 +148,8 @@ public class AppInterface extends Interface {
         findNameBtn.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
+                        logger.info("[AppInterface] Pressed 'find by name' button");
+
                         if (nameTextField.getText().length() > 0)
                             model.setData(
                                     db.filter(
@@ -183,6 +186,7 @@ public class AppInterface extends Interface {
         findLengthBtn.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
+                        logger.info("[AppInterface] Pressed 'find by length' button");
                         try {
                             if (lengthTextField.getText().length() > 0) {
                                 ArrayList<Record> result = db.filter(
@@ -223,6 +227,8 @@ public class AppInterface extends Interface {
         findGoodBtn.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
+                        logger.info("[AppInterface] Pressed 'find by good' button");
+
                         model.setData(
                                 db.filter(
                                         new Record(
@@ -395,6 +401,8 @@ public class AppInterface extends Interface {
         deleteBtn.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
+                        logger.info("[AppInterface] Pressed 'delete' button");
+
                         // Get selected rows
                         int[] selected = table.getSelectedRows();
 

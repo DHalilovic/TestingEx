@@ -19,7 +19,6 @@ public class AVLTree<V extends Comparable<V>>  extends BinarySearchTree<V>{
 
     // returns true if (id, val) pair was added to tree.
     public boolean add(Integer id, V val) {
-        logger.error("asdf");
         Node<V> newNode = new Node<V>(id, val,EMPTY,EMPTY);
 
         // add value to binary search tree
@@ -27,6 +26,7 @@ public class AVLTree<V extends Comparable<V>>  extends BinarySearchTree<V>{
         if (root.isEmpty())
         {
             root = newNode;
+            logger.debug("[AVLTree] Created root with " + id + ", " + val.toString());
         } else {
             Node<V> insertLocation = search(root,val);
             int initialSize = insertLocation.ids.size();
@@ -45,9 +45,11 @@ public class AVLTree<V extends Comparable<V>>  extends BinarySearchTree<V>{
         if (isEmpty()) return null;
 
         Node<V> removeAt = search(root, val);
+        logger.debug("[AVLTree] Searched node with value " + val.toString() + " of item to remove, " + id);
         Node<V> p = null;
 
          if (val.equals(removeAt.value())) {
+             logger.debug("[AVLTree] Located node with value " + val.toString());
              if(removeAt.ids.size() < 2) {
                  if(removeAt.parent() != null) p = removeAt.parent();
                  boolean wasLeftChild = removeAt.isLeft();

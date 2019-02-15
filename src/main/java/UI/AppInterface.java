@@ -15,6 +15,8 @@ import java.util.Arrays;
 
 import static org.mockito.Mockito.mock;
 
+import static org.mockito.Mockito.mock;
+
 public class AppInterface extends Interface {
 
     protected JTable table;

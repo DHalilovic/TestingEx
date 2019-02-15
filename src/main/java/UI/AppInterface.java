@@ -2,6 +2,8 @@ package UI;
 
 import Database.AppDatabase;
 import Database.Record;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -10,17 +12,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class AppInterface extends Interface {
 
     protected JTable table;
     protected RecordTableModel model;
 
+    final static Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
+
     public AppInterface() {
         super();
+        logger.debug("[AppInterface] Initialized JFrame");
 
         db = new AppDatabase();
+        logger.debug("[AppInterface] Initialized AppDatabase member");
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int height = (int) (screenSize.getHeight());
@@ -28,6 +33,7 @@ public class AppInterface extends Interface {
 
         frame.setSize(width, height);
         frame.setLocation(0, 0);
+        logger.debug("[AppInterface] Configured initial window size");
 
         frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 
@@ -35,6 +41,7 @@ public class AppInterface extends Interface {
         frame.getContentPane().add(setTextArea());
 
         frame.setVisible(true);
+        logger.debug("[AppInterface] Made JFrame visible");
     }
 
     private JPanel setPanel() {
@@ -51,6 +58,7 @@ public class AppInterface extends Interface {
         tabbedPane.add("Add", initAddPanel());
         tabbedPane.add("Find", initFindPanel());
         //tabbedPane.add("Delete", initDeletePannel()); // Broken
+        logger.debug("[AppInterface] Added add, find tabs");
 
         panel.add(tabbedPane);
 

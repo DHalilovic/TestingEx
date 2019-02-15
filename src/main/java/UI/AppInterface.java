@@ -50,7 +50,7 @@ public class AppInterface extends Interface {
 
         tabbedPane.add("Add", initAddPanel());
         tabbedPane.add("Find", initFindPanel());
-        tabbedPane.add("Delete", initDeletePannel());
+        //tabbedPane.add("Delete", initDeletePannel()); // Broken
 
         panel.add(tabbedPane);
 
@@ -244,7 +244,7 @@ public class AppInterface extends Interface {
         return panel;
     }
 
-    private JPanel initDeletePannel() {
+    /*private JPanel initDeletePannel() {
         // Initialize panel
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -367,7 +367,7 @@ public class AppInterface extends Interface {
         panel.add(tabbedPane);
 
         return panel;
-    }
+    }*/
 
     private JPanel setTextArea() {
         // Initialize panel

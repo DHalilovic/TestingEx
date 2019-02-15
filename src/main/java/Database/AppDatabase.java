@@ -43,11 +43,13 @@ public class AppDatabase extends Database {
                     Record t = it.next();
                     if (t.getName().equals(r.getName())) {
                         idsToRemove.add(t.getId());
+                        //System.out.println(t.getId());
                     }
                 }
 
                 for( Integer id : idsToRemove ) {
                     Record recordToBeRemoved = records.remove(id);
+                    System.out.println(recordToBeRemoved);
                     tree.remove(recordToBeRemoved.getId(), r.getLength());
                     removed.add(recordToBeRemoved);
                 }

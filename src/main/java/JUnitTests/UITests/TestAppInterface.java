@@ -17,9 +17,7 @@ import javax.swing.*;
 
 import java.awt.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 //import static org.junit.Assert.*;
@@ -70,6 +68,47 @@ public class TestAppInterface  {
     public void testFindName() {
         ui.run();
 
+        ui.getFindNameTextField().setText("Name");
 
+        ui.getFindNameBtn().doClick();
+
+        ArgumentCaptor<Record> arg = ArgumentCaptor.forClass(Record.class);
+        verify(databaseMock).filter(arg.capture());
+
+        Record r = arg.getValue();
+        assertEquals("Name", r.getName());
+        assertNull(r.getLength());
+    }
+
+    @Test
+    public void testFindNameEmpty() {
+        ui.run();
+        ui.getFindNameBtn().doClick();
+
+        verify(databaseMock, never()).filter(any(Record.class));
+    }
+
+    @Test
+    public void testFindLength() {
+        ui.run();
+
+        ui.getFindLengthTextField().setValue(5);
+
+        ui.getFindLengthBtn().doClick();
+
+        ArgumentCaptor<Record> arg = ArgumentCaptor.forClass(Record.class);
+        verify(databaseMock).filter(arg.capture());
+
+        Record r = arg.getValue();
+        assertNull(r.getName());
+        assertEquals(5, (int) r.getLength());
+    }
+
+    @Test
+    public void testFindLengthEmpty() {
+        ui.run();
+        ui.getFindLengthBtn().doClick();
+
+        verify(databaseMock, never()).filter(any(Record.class));
     }
 }

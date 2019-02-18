@@ -1,6 +1,6 @@
-2019-02-18 11:00:44.522 [main] DEBUG  - [AppInterface] Initialized JFrame
-2019-02-18 11:00:44.525 [main] DEBUG  - [AppInterface] Initialized AppDatabase member
-2019-02-18 11:00:44.526 [main] DEBUG  - [AppInterface] Configured initial window size
-2019-02-18 11:00:44.800 [main] DEBUG  - [AppInterface] Added add, find tabs
-2019-02-18 11:00:45.121 [main] DEBUG  - [AppInterface] Made JFrame visible
-2019-02-18 11:00:45.341 [main] INFO   - [AppInterface] Pressed 'add' button
+2019-02-18 11:55:09.454 [main] DEBUG  - [AppInterface] Initialized JFrame
+2019-02-18 11:55:09.458 [main] DEBUG  - [AppInterface] Initialized AppDatabase member
+2019-02-18 11:55:09.459 [main] DEBUG  - [AppInterface] Configured initial window size
+2019-02-18 11:55:09.538 [main] DEBUG  - [AppInterface] Added add, find tabs
+2019-02-18 11:55:09.641 [main] DEBUG  - [AppInterface] Made JFrame visible
+2019-02-18 11:55:09.712 [main] INFO   - [AppInterface] Pressed 'find by length' button

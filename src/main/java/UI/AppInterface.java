@@ -110,6 +110,7 @@ public class AppInterface {
         // textfield for 'length' attribute:
         JLabel lengthLabel = new JLabel("Length:");
         final JFormattedTextField lengthTextField = new JFormattedTextField(NumberFormat.getIntegerInstance());
+//        lengthTextField.setValue(0);
         lengthTextField.setColumns(20);
         lengthLabel.setLabelFor(lengthTextField);
 

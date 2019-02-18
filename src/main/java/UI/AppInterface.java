@@ -23,7 +23,7 @@ public class AppInterface {
     protected JFormattedTextField addLengthTextField, findLengthTextField;
     protected JButton addBtn;
     protected JButton deleteBtn;
-    protected JButton findBtn;
+    protected JButton findNameBtn, findGoodBtn, findLengthBtn;
 
     protected JTable table;
     protected RecordTableModel model;
@@ -76,8 +76,28 @@ public class AppInterface {
         return deleteBtn;
     }
 
-    public JButton getFindBtn(){
-        return findBtn;
+    public JButton getFindNameBtn(){
+        return findNameBtn;
+    }
+
+    public JTextField getFindNameTextField() {
+        return findNameTextField;
+    }
+
+    public JCheckBox getFindGoodCheckBox() {
+        return findGoodCheckBox;
+    }
+
+    public JFormattedTextField getFindLengthTextField() {
+        return findLengthTextField;
+    }
+
+    public JButton getFindGoodBtn() {
+        return findGoodBtn;
+    }
+
+    public JButton getFindLengthBtn() {
+        return findLengthBtn;
     }
 
     private JPanel setPanel() {
@@ -177,21 +197,21 @@ public class AppInterface {
 
         // textfield for 'name' attribute:
         JLabel nameLabel = new JLabel("Name:");
-        final JTextField nameTextField = new JTextField(20);
-        nameLabel.setLabelFor(nameTextField);
+        findNameTextField = new JTextField(20);
+        nameLabel.setLabelFor(findNameTextField);
 
         // button for 'name' attribute
-        findBtn = new JButton("Find");
-        findBtn.addActionListener(
+        findNameBtn = new JButton("Find");
+        findNameBtn.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         logger.info("[AppInterface] Pressed 'find by name' button");
 
-                        if (nameTextField.getText().length() > 0)
+                        if (findNameTextField.getText().length() > 0)
                             model.setData(
                                     db.filter(
                                             new Record(
-                                                    nameTextField.getText(),
+                                                    findNameTextField.getText(),
                                                     false,
                                                     null
                                             )
@@ -205,8 +225,8 @@ public class AppInterface {
 
         // Add components to name panel
         namePanel.add(nameLabel);
-        namePanel.add(nameTextField);
-        namePanel.add(findBtn);
+        namePanel.add(findNameTextField);
+        namePanel.add(findNameBtn);
 
         // Initialize length panel
         Panel lengthPanel = new Panel();
@@ -214,24 +234,24 @@ public class AppInterface {
 
         // textfield for 'length' attribute:
         JLabel lengthLabel = new JLabel("Length:");
-        final JFormattedTextField lengthTextField = new JFormattedTextField(NumberFormat.getIntegerInstance());
-        lengthTextField.setColumns(20);
-        lengthLabel.setLabelFor(lengthTextField);
+        findLengthTextField = new JFormattedTextField(NumberFormat.getIntegerInstance());
+        findLengthTextField.setColumns(20);
+        lengthLabel.setLabelFor(findLengthTextField);
 
         // button for 'length' attribute
-        JButton findLengthBtn = new JButton("Find");
+        findLengthBtn = new JButton("Find");
         findLengthBtn.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         logger.info("[AppInterface] Pressed 'find by length' button");
                         try {
-                            if (lengthTextField.getText().length() > 0) {
+                            if (findLengthTextField.getText().length() > 0) {
                                 ArrayList<Record> result = db.filter(
                                         new Record(
                                                 null,
                                                 false,
                                                 Integer.parseInt(
-                                                        lengthTextField.getText().replaceAll(",", "")
+                                                        findLengthTextField.getText().replaceAll(",", "")
                                                 )
                                         )
                                 );
@@ -247,7 +267,7 @@ public class AppInterface {
 
         // Add components to length panel
         lengthPanel.add(lengthLabel);
-        lengthPanel.add(lengthTextField);
+        lengthPanel.add(findLengthTextField);
         lengthPanel.add(findLengthBtn);
 
         // Initialize good panel
@@ -256,11 +276,11 @@ public class AppInterface {
 
         // checkbox for 'good' attribute:
         JLabel goodLabel = new JLabel("Good?:");
-        final JCheckBox goodCheckBox = new JCheckBox();
-        goodLabel.setLabelFor(goodCheckBox);
+        findGoodCheckBox = new JCheckBox();
+        goodLabel.setLabelFor(findGoodCheckBox);
 
         // button for 'good' attribute
-        JButton findGoodBtn = new JButton("Find");
+        findGoodBtn = new JButton("Find");
         findGoodBtn.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
@@ -270,7 +290,7 @@ public class AppInterface {
                                 db.filter(
                                         new Record(
                                                 null,
-                                                goodCheckBox.isSelected(),
+                                                findGoodCheckBox.isSelected(),
                                                 null
                                         )
                                 )
@@ -281,7 +301,7 @@ public class AppInterface {
 
         // Add components to good panel
         goodPanel.add(goodLabel);
-        goodPanel.add(goodCheckBox);
+        goodPanel.add(findGoodCheckBox);
         goodPanel.add(findGoodBtn);
 
         // Add tabs to tabbed pane

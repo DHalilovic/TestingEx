@@ -18,6 +18,9 @@ public class AppInterface {
 
     protected JFrame frame;
     protected Database db;
+    protected JTextField addNameTextField;
+    protected JCheckBox addGoodCheckBox;
+    protected JFormattedTextField addLengthTextField;
     protected JButton addBtn;
     protected JButton deleteBtn;
     protected JButton findBtn;
@@ -59,6 +62,12 @@ public class AppInterface {
         logger.debug("[AppInterface] Made JFrame visible");
     }
 
+    public JTextField getAddNameTextField() { return addNameTextField; }
+
+    public JCheckBox getAddGoodCheckBox() { return addGoodCheckBox; }
+
+    public JFormattedTextField getAddLengthTextField() { return addLengthTextField; }
+
     public JButton getAddBtn(){
         return addBtn;
     }
@@ -99,20 +108,20 @@ public class AppInterface {
 
         // textfield for 'name' attribute:
         JLabel nameLabel = new JLabel("Name:");
-        final JTextField nameTextField = new JTextField(20);
-        nameLabel.setLabelFor(nameTextField);
+        addNameTextField = new JTextField(20);
+        nameLabel.setLabelFor(addNameTextField);
 
         // checkbox for 'good' attribute:
         JLabel goodLabel = new JLabel("Good?:");
-        final JCheckBox goodCheckBox = new JCheckBox();
-        goodLabel.setLabelFor(goodCheckBox);
+        addGoodCheckBox = new JCheckBox();
+        goodLabel.setLabelFor(addGoodCheckBox);
 
         // textfield for 'length' attribute:
         JLabel lengthLabel = new JLabel("Length:");
-        final JFormattedTextField lengthTextField = new JFormattedTextField(NumberFormat.getIntegerInstance());
+        addLengthTextField = new JFormattedTextField(NumberFormat.getIntegerInstance());
 //        lengthTextField.setValue(0);
-        lengthTextField.setColumns(20);
-        lengthLabel.setLabelFor(lengthTextField);
+        addLengthTextField.setColumns(20);
+        lengthLabel.setLabelFor(addLengthTextField);
 
         // Create add button:
         addBtn = new JButton("Add record");
@@ -124,12 +133,12 @@ public class AppInterface {
                         logger.info("[AppInterface] Pressed 'add' button");
                         // Check for valid input
                         // If all inputs filled, add record
-                        if (nameTextField.getText().length() > 0 && lengthTextField.getText().length() > 0) {
+                        if (addNameTextField.getText().length() > 0 && addLengthTextField.getText().length() > 0) {
                             // Parse record
                             Record r = new Record(
-                                    nameTextField.getText(),
-                                    goodCheckBox.isSelected(),
-                                    Integer.parseInt(lengthTextField.getText().replaceAll(",", ""))
+                                    addNameTextField.getText(),
+                                    addGoodCheckBox.isSelected(),
+                                    Integer.parseInt(addLengthTextField.getText().replaceAll(",", ""))
                             );
                             // Add record to database
                             db.add(r);
@@ -144,11 +153,11 @@ public class AppInterface {
 
         // Add components to panel
         panel.add(nameLabel);
-        panel.add(nameTextField);
+        panel.add(addNameTextField);
         panel.add(goodLabel);
-        panel.add(goodCheckBox);
+        panel.add(addGoodCheckBox);
         panel.add(lengthLabel);
-        panel.add(lengthTextField);
+        panel.add(addLengthTextField);
         panel.add(addBtn);
 
         return panel;

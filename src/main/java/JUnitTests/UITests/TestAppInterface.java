@@ -55,6 +55,13 @@ public class TestAppInterface  {
 //        verify(databaseMock, never()).add(any(Record.class));
 //    }
 
+    @Test
+    public void testAdded() throws Exception {
+        ui.run();
+
+        verify(databaseMock).add(any(Record.class));
+    }
+
     public class MockitoTest  {
 
         @Mock

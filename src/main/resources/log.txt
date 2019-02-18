@@ -1,0 +1,5 @@
+2019-02-18 01:57:49.367 [main] DEBUG  - [AppInterface] Initialized JFrame
+2019-02-18 01:57:49.389 [main] DEBUG  - [AppInterface] Initialized AppDatabase member
+2019-02-18 01:57:49.390 [main] DEBUG  - [AppInterface] Configured initial window size
+2019-02-18 01:57:49.412 [main] DEBUG  - [AppInterface] Added add, find tabs
+2019-02-18 01:57:49.532 [main] DEBUG  - [AppInterface] Made JFrame visible

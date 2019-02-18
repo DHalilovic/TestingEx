@@ -1,6 +1,7 @@
 package UI;
 
 import Database.AppDatabase;
+import Database.Database;
 import Database.Record;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,20 +14,34 @@ import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
-public class AppInterface extends Interface {
+public class AppInterface {
+
+    protected JFrame frame;
+    protected Database db;
+    protected JButton addBtn;
+    protected JButton deleteBtn;
+    protected JButton findBtn;
 
     protected JTable table;
     protected RecordTableModel model;
 
     final static Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
 
-    public AppInterface() {
-        super();
+    public AppInterface(){
+        this(new AppDatabase());
+    }
+
+    public AppInterface( Database database ) {
+        frame = new JFrame("Graphical User Interface");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         logger.debug("[AppInterface] Initialized JFrame");
 
-        db = new AppDatabase();
+        db = database;
         logger.debug("[AppInterface] Initialized AppDatabase member");
+    }
 
+    public void run(){
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int height = (int) (screenSize.getHeight());
         int width = (int) (4.5 * screenSize.getWidth() / 5);
@@ -42,6 +57,18 @@ public class AppInterface extends Interface {
 
         frame.setVisible(true);
         logger.debug("[AppInterface] Made JFrame visible");
+    }
+
+    public JButton getAddBtn(){
+        return addBtn;
+    }
+
+    public JButton getDeleteBtn(){
+        return deleteBtn;
+    }
+
+    public JButton getFindBtn(){
+        return findBtn;
     }
 
     private JPanel setPanel() {
@@ -87,7 +114,7 @@ public class AppInterface extends Interface {
         lengthLabel.setLabelFor(lengthTextField);
 
         // Create add button:
-        JButton addBtn = new JButton("Add record");
+        addBtn = new JButton("Add record");
 
         // Assign add button listener:
         addBtn.addActionListener(
@@ -144,8 +171,8 @@ public class AppInterface extends Interface {
         nameLabel.setLabelFor(nameTextField);
 
         // button for 'name' attribute
-        JButton findNameBtn = new JButton("Find");
-        findNameBtn.addActionListener(
+        findBtn = new JButton("Find");
+        findBtn.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         logger.info("[AppInterface] Pressed 'find by name' button");
@@ -169,7 +196,7 @@ public class AppInterface extends Interface {
         // Add components to name panel
         namePanel.add(nameLabel);
         namePanel.add(nameTextField);
-        namePanel.add(findNameBtn);
+        namePanel.add(findBtn);
 
         // Initialize length panel
         Panel lengthPanel = new Panel();
@@ -397,7 +424,7 @@ public class AppInterface extends Interface {
         vertical.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
         // Initialize delete button
-        JButton deleteBtn = new JButton("Delete Selected");
+        deleteBtn = new JButton("Delete Selected");
         deleteBtn.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent e) {

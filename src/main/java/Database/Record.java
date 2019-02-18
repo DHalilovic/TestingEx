@@ -49,6 +49,10 @@ public class Record implements Comparable<Record>
         return length.compareTo(o.getLength());
     }
 
+    public boolean equals(Record o){
+        return compareTo(o) == 0;
+    }
+
     @Override
     public String toString(){
         String idString = "{ Id = " + String.valueOf(this.id) + ", ";

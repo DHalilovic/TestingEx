@@ -34,7 +34,6 @@ public class TestAppInterface  {
 
     @Before
     public void setUp(){
-        // Notice how we now pass in the dependency (or in this case a mock)
         ui = new AppInterface(databaseMock);
     }
 
@@ -47,18 +46,6 @@ public class TestAppInterface  {
 
         verify(databaseMock, never()).add(any(Record.class));
     }
-
-//    public void testAdded() throws Exception {
-//        ui.run();
-//
-//        Record r = new Record("", false, 0);
-//        when(databaseMock.add(any(Record.class))).thenReturn(r);
-//
-//        JButton addBtn = ui.getAddBtn();
-//        addBtn.doClick();
-//
-//        verify(databaseMock, never()).add(any(Record.class));
-//    }
 
     @Test
     public void testAdded() throws Exception {
@@ -77,5 +64,12 @@ public class TestAppInterface  {
         assertEquals("Name", r.getName());
         assertEquals(true, r.isGood());
         assertEquals(5, (int) r.getLength());
+    }
+
+    @Test
+    public void testFindName() {
+        ui.run();
+
+
     }
 }

@@ -18,9 +18,9 @@ public class AppInterface {
 
     protected JFrame frame;
     protected Database db;
-    protected JTextField addNameTextField;
-    protected JCheckBox addGoodCheckBox;
-    protected JFormattedTextField addLengthTextField;
+    protected JTextField addNameTextField, findNameTextField;
+    protected JCheckBox addGoodCheckBox, findGoodCheckBox;
+    protected JFormattedTextField addLengthTextField, findLengthTextField;
     protected JButton addBtn;
     protected JButton deleteBtn;
     protected JButton findBtn;

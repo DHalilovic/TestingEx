@@ -31,7 +31,7 @@ public class TestAppInterface  {
     protected AppInterface ui = new AppInterface(databaseMock);
 
     @Test
-    public void testAdd() throws Exception {
+    public void testNotAdded() throws Exception {
         ui.run();
 
         Record r = new Record("", false, 0);
@@ -39,10 +39,21 @@ public class TestAppInterface  {
 
         JButton addBtn = ui.getAddBtn();
         addBtn.doClick();
-        verify(databaseMock).add(any(Record.class));
 
-        assertEquals(r, new Record("", false, 0));
+        verify(databaseMock, never()).add(any(Record.class));
     }
+
+//    public void testAdded() throws Exception {
+//        ui.run();
+//
+//        Record r = new Record("", false, 0);
+//        when(databaseMock.add(any(Record.class))).thenReturn(r);
+//
+//        JButton addBtn = ui.getAddBtn();
+//        addBtn.doClick();
+//
+//        verify(databaseMock, never()).add(any(Record.class));
+//    }
 
     public class MockitoTest  {
 

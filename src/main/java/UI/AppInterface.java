@@ -100,6 +100,8 @@ public class AppInterface {
         return findLengthBtn;
     }
 
+    public JTable getTable() { return table; }
+
     private JPanel setPanel() {
         // Initialize tab pane
         JTabbedPane tabbedPane = new JTabbedPane();

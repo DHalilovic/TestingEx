@@ -111,4 +111,27 @@ public class TestAppInterface  {
 
         verify(databaseMock, never()).filter(any(Record.class));
     }
+
+    @Test
+    public void testFindGood() {
+        ui.run();
+        ui.getFindGoodBtn().doClick();
+
+        ArgumentCaptor<Record> arg = ArgumentCaptor.forClass(Record.class);
+        verify(databaseMock).filter(arg.capture());
+
+        Record r = arg.getValue();
+        assertEquals(false, r.isGood());
+        assertNull(r.getName());
+        assertNull(r.getLength());
+    }
+
+    @Test
+    public void testDeleteEmpty() {
+        ui.run();
+        ui.getTable().selectAll();
+        ui.getDeleteBtn().doClick();
+
+        verify(databaseMock, never()).remove(any(Record.class));
+    }
 }

@@ -1,6 +1,5 @@
 package JUnitTests.UITests;
 
-import BinarySearchTree.BinarySearchTree;
 import Database.*;
 
 import UI.AppInterface;
@@ -8,6 +7,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
@@ -15,20 +15,19 @@ import org.mockito.junit.MockitoRule;
 
 import javax.swing.*;
 
-import java.awt.*;
-
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-//import static org.junit.Assert.*;
-//import static org.mockito.Mockito.*;
 
 public class TestAppInterface  {
 
     @Mock protected Database databaseMock = Mockito.mock(Database.class);
     @Rule public MockitoRule mockitoRule = MockitoJUnit.rule();
 
+    @Captor private ArgumentCaptor<Record> argForRecord;
+
     protected AppInterface ui;
+
 
     @Before
     public void setUp(){
@@ -55,10 +54,10 @@ public class TestAppInterface  {
 
         ui.getAddBtn().doClick();
 
-        ArgumentCaptor<Record> arg = ArgumentCaptor.forClass(Record.class);
-        verify(databaseMock).add(arg.capture());
 
-        Record r = arg.getValue();
+        verify(databaseMock).add(argForRecord.capture());
+
+        Record r = argForRecord.getValue();
         assertEquals("Name", r.getName());
         assertEquals(true, r.isGood());
         assertEquals(5, (int) r.getLength());
